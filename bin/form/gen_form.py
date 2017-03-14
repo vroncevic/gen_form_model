@@ -30,7 +30,7 @@ class GenForm(ReadTemplate, WriteTemplate):
 
 	def gen_form(self, form_name):
 		"""
-		:arg: form_name - Parameter form class name
+		:param form_name: Parameter form class name
 		:type: str
 		:return: Boolean status
 		:rtype: bool

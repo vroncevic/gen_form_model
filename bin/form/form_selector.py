@@ -14,9 +14,9 @@ class FormSelector(object):
 	Selecting python template form for generating process.
 	It defines:
 		attribute:
-			Django - 0 (Django form)
-			Flask - 1 (Flask form)
-			Cancel - 2 (Cancel option)
+			Django - 0 Django form
+			Flask - 1 Flask form
+			Cancel - 2 Cancel option
 			__MODULES - Dictionary with options
 		method:
 			choose_form - Selecting type of form for generating process
@@ -51,7 +51,7 @@ class FormSelector(object):
 	@classmethod
 	def format_name(cls, form_name):
 		"""
-		:arg: form_name - Form name
+		:param form_name: Form name
 		:type: str
 		:return: File name with extension
 		:rtype: str or NoneType

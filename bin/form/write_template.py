@@ -30,9 +30,9 @@ class WriteTemplate(object):
 
 	def write(self, form_content, form_name):
 		"""
-		:arg: form_content - Template form content
+		:param form_content: Template form content
 		:type: str
-		:arg: form_name - Parameter form name
+		:param form_name: Parameter form name
 		:type: str
 		:return: Boolean status
 		:rtype: bool

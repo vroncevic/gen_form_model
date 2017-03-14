@@ -40,7 +40,7 @@ class ReadTemplate(object):
 
 	def read(self, form_type):
 		"""
-		:arg: form_type - Type of form
+		:param form_type: Type of form
 		:type: int
 		:return: Form content
 		:rtype: str or NoneType
