@@ -57,5 +57,5 @@ class FormSelector(object):
 		:rtype: str or NoneType
 		"""
 		if form_name:
-			return "form_{0}{1}".format(form_name.lower(), ".py")
+			return "{0}{1}".format(form_name.lower(), ".py")
 		return None

@@ -9,9 +9,10 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 from datetime import date
-from os import getcwd
+from os import getcwd, chmod
 from string import Template
 from form.form_selector import FormSelector
+from app.error.lookup_error import AppError
 
 class WriteTemplate(object):
 	"""
@@ -19,14 +20,14 @@ class WriteTemplate(object):
 	Write a template content with parameters to a file.
 	It defines:
 		attribute:
-			None
+			__status - Operation status
 		method:
 			__init__ - Initial constructor
 			write - Write a template content with parameters to a file
 	"""
 
 	def __init__(self):
-		pass
+		self.__status = False
 
 	def write(self, form_content, form_name):
 		"""
@@ -37,23 +38,28 @@ class WriteTemplate(object):
 		:return: Boolean status
 		:rtype: bool
 		"""
-		current_dir = getcwd()
-		file_name = FormSelector.format_name(form_name)
-		if file_name:
-			module_file = "{0}/{1}".format(current_dir, file_name)
-			module_info = {
-				"mod" : "{0}".format(form_name),
-				"modlc": "{0}".format(form_name.lower()),
-				"date" : "{0}".format(date.today()),
-				"year" : "{0}".format(date.today().year)
-			}
-			try:
+		try:
+			file_name = FormSelector.format_name(form_name)
+			if file_name:
+				current_dir = getcwd()
+				module_file = "{0}/{1}".format(current_dir, file_name)
+				module_info = {
+					"mod": "{0}".format(form_name),
+					"modlc": "{0}".format(form_name.lower()),
+					"date": "{0}".format(date.today()),
+					"year": "{0}".format(date.today().year)
+				}
 				template = Template(form_content)
 				form_file = open(module_file, "w")
 				form_file.write(template.substitute(module_info))
-			except (IOError, KeyError) as e:
-				print("I/O error({0}): {1}".format(e.errno, e.strerror))
 			else:
-				form_file.close()
-				return True
-		return False
+				raise AppError("missing module file name!")
+		except (IOError, KeyError) as e:
+			print("I/O error({0}): {1}".format(e.errno, e.strerror))
+		except AppError as e2:
+			print("Error: ", e2)
+		else:
+			form_file.close()
+			chmod(module_file, 0o666)
+			self.__status = True
+		return self.__status

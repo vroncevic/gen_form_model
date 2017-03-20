@@ -18,7 +18,7 @@ class GenForm(ReadTemplate, WriteTemplate):
 	Generate form model by template and parameters.
 	It defines:
 		attribute:
-			None
+			__status - Operation status
 		method:
 			__init__ - Initial constructor
 			gen_form - Generate form module file
@@ -27,6 +27,7 @@ class GenForm(ReadTemplate, WriteTemplate):
 	def __init__(self):
 		ReadTemplate.__init__(self)
 		WriteTemplate.__init__(self)
+		self.__status = False
 
 	def gen_form(self, form_name):
 		"""
@@ -35,13 +36,11 @@ class GenForm(ReadTemplate, WriteTemplate):
 		:return: Boolean status
 		:rtype: bool
 		"""
-		status = False
 		form_type = FormSelector.choose_form()
 		if form_type != FormSelector.Cancel:
 			form_content = self.read(form_type)
 			if form_content:
-				status = self.write(form_content, form_name)
-			return status
+				self.__status = self.write(form_content, form_name)
 		else:
-			status = True
-		return status
+			self.__status = True
+		return self.__status
