@@ -1,4 +1,4 @@
-Generate form model (Python codes).
+Generate Form Model (Django/Flask).
 ================================================================================
 
 The README is used to introduce the modules and provide instructions on
@@ -10,9 +10,7 @@ INSTALLATION
 To install this set of modules type the following:
 
 	cp -R ~/gen_form_model/bin/   /root/scripts/gen_form_model/ver.1.0/
-
 	cp -R ~/gen_form_model/conf/  /root/scripts/gen_form_model/ver.1.0/
-
 	cp -R ~/gen_form_model/log/   /root/scripts/gen_form_model/ver.1.0/
 
 DEPENDENCIES
@@ -34,5 +32,5 @@ it under the same terms as Python itself, either Python version 3.4.2 or,
 at your option, any later version of Python 3 you may have available.
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/master/python_logo.png)
-![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/master/linux_logo.jpg)
+![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/master/linux_logo.png)
 
