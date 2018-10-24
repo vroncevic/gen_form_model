@@ -28,7 +28,7 @@ try:
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as e:
     msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ###################################
+    sys.exit(msg)  # Force close python ATS ##################################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -40,24 +40,22 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 
-class GenForm(ReadTemplate, WriteTemplate):
+class GenForm(object):
     """
         Define class GenForm with attribute(s) and method(s).
         Generate form model by template and parameters.
         It defines:
             attribute:
-                __CLASS_SLOTS__ - Setting class slots
+                __slots__ - Setting class slots
                 VERBOSE - Console text indicator for current process-phase
-                __status - Operation status
+                __reader - Reader API
+                __writter - Writer API
             method:
                 __init__ - Initial constructor
                 gen_form - Generate form module file
     """
 
-    __CLASS_SLOTS__ = (
-        'VERBOSE',  # Read-Only
-        '__status'
-    )
+    __slots__ = ('VERBOSE', '__reader', '__writer')
     VERBOSE = 'FORM::GENFORM'
 
     def __init__(self, verbose=False):
@@ -65,12 +63,11 @@ class GenForm(ReadTemplate, WriteTemplate):
             Initial constructor.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
+            :exceptions: None
         """
-        cls = GenForm
-        verbose_message(cls.VERBOSE, verbose, 'Initial form generator')
-        ReadTemplate.__init__(self)
-        WriteTemplate.__init__(self)
-        self.__status = False
+        verbose_message(GenForm.VERBOSE, verbose, 'Initial form generator')
+        self.__reader = ReadTemplate(verbose=verbose)
+        self.__writer = WriteTemplate(verbose=verbose)
 
     def gen_form(self, form_name, verbose=False):
         """
@@ -81,8 +78,9 @@ class GenForm(ReadTemplate, WriteTemplate):
             :type verbose: <bool>
             :return: Boolean status True (success) | False
             :rtype: <bool>
+            :exceptions: ATSBadCallError | ATSTypeError
         """
-        cls, func, form_content = ReadTemplate, stack()[0][3], None
+        status, func, form_content = False, stack()[0][3], None
         form_name_txt = 'Argument: expected form_name <int> object'
         form_name_msg = "{0} {1} {2}".format('def', func, form_name_txt)
         if form_name is None or not form_name:
@@ -91,12 +89,10 @@ class GenForm(ReadTemplate, WriteTemplate):
             raise ATSTypeError(form_name_msg)
         form_type = FormSelector.choose_form(verbose=verbose)
         if form_type != FormSelector.Cancel:
-            form_content = self.read(form_type, verbose=verbose)
+            form_content = self.__reader.read(form_type, verbose=verbose)
             if form_content:
-                self.__status = self.write(
+                status = self.__writer.write(
                     form_content, form_name, verbose=verbose
                 )
-                self.__status = True
-        else:
-            self.__status = True
-        return self.__status
+        return True if status else False
+

@@ -23,7 +23,6 @@ from os import getcwd, chmod
 from string import Template
 
 try:
-    from ats_utilities.slots import BaseSlots
     from form.form_selector import FormSelector
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
@@ -31,7 +30,7 @@ try:
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as e:
     msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ###################################
+    sys.exit(msg)  # Force close python ATS ##################################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -43,24 +42,20 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 
-class WriteTemplate(BaseSlots):
+class WriteTemplate(object):
     """
         Define class WriteTemplate with attribute(s) and method(s).
         Write a template content with parameters to a file.
         It defines:
             attribute:
-                __CLASS_SLOTS__ - Setting class slots
+                __slots__ - Setting class slots
                 VERBOSE - Console text indicator for current process-phase
-                __status - Operation status
             method:
                 __init__ - Initial constructor
                 write - Write a template content with parameters to a file
     """
 
-    __CLASS_SLOTS__ = (
-        'VERBOSE',  # Read-Only
-        '__status'
-    )
+    __slots__ = ('VERBOSE')
     VERBOSE = 'FORM::WRITE_TEMPLATE'
 
     def __init__(self, verbose=False):
@@ -68,11 +63,9 @@ class WriteTemplate(BaseSlots):
             Initial constructor.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
+            :exceptions: None
         """
-        cls = WriteTemplate
-        verbose_message(cls.VERBOSE, verbose, 'Initial template')
-        BaseSlots.__init__(self)
-        self.__status = False
+        verbose_message(WriteTemplate.VERBOSE, verbose, 'Initial template')
 
     def write(self, form_content, form_name, verbose=False):
         """
@@ -87,7 +80,7 @@ class WriteTemplate(BaseSlots):
             :rtype: <bool>
             :exception: ATSBadCallError | ATSTypeError
         """
-        cls, func = WriteTemplate, stack()[0][3]
+        func = stack()[0][3]
         form_content_txt = 'Argument: expected form_content <str> object'
         form_content_msg = "{0} {1} {2}".format('def', func, form_content_txt)
         form_name_txt = 'Argument: expected form_name <str> object'
@@ -102,7 +95,9 @@ class WriteTemplate(BaseSlots):
             raise ATSTypeError(form_name_msg)
         file_name = FormSelector.format_name(form_name)
         if file_name:
-            verbose_message(cls.VERBOSE, verbose, 'Generating form model')
+            verbose_message(
+                WriteTemplate.VERBOSE, verbose, 'Generating form model'
+            )
             current_dir = getcwd()
             module_file = "{0}/{1}".format(current_dir, file_name)
             module_info = {
@@ -115,7 +110,10 @@ class WriteTemplate(BaseSlots):
             with open(module_file, 'w') as form_file:
                 form_file.write(template.substitute(module_info))
                 chmod(module_file, 0o666)
-                self.__status = True
+                status = True
         else:
-            error_message(cls.VERBOSE, 'Failed to select module file name')
-        return self.__status
+            error_message(
+                WriteTemplate.VERBOSE, 'Failed to select module file name'
+            )
+        return True if status else False
+
