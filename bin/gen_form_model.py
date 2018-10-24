@@ -29,7 +29,7 @@ try:
     from ats_utilities.console_io.success import success_message
 except ImportError as e:
     msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ###################################
+    sys.exit(msg)  # Force close python ATS ##################################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -41,13 +41,13 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 
-class GenFormModel(CfgBase, GenForm):
+class GenFormModel(CfgBase):
     """
         Define class GenFormModel with attribute(s) and method(s).
         Load a settings, create an interface and run operation(s).
         It defines:
             attribute:
-                __CLASS_SLOTS__ - Setting class slots
+                __slots__ - Setting class slots
                 VERBOSE - Console text indicator for current process-phase
                 __CONFIG - Configuration file path
                 __OPS -  Tool options (list)
@@ -56,9 +56,7 @@ class GenFormModel(CfgBase, GenForm):
                 process - Process and run tool option
     """
 
-    __CLASS_SLOTS__ = (
-        'VERBOSE', '__CONFIG', '__OPS'  # Read-Only
-    )
+    __slots__ = ('VERBOSE', '__CONFIG', '__OPS')
     VERBOSE = 'GENERATE_FORM_MODEL'
     __CONFIG = '/../conf/gen_form_model.cfg'
     __OPS = ['-g', '--gen', '-h', '--version']
@@ -68,19 +66,17 @@ class GenFormModel(CfgBase, GenForm):
             Loading configuration and setting argument options.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
+            :exceptions: None
         """
-        cls = GenFormModel
-        verbose_message(cls.VERBOSE, verbose, 'Initial configuration')
+        verbose_message(GenFormModel.VERBOSE, verbose, 'Initial configuration')
         module_dir = Path(__file__).resolve().parent
-        base_config_file = "{0}{1}".format(module_dir, cls.__CONFIG)
+        base_config_file = "{0}{1}".format(module_dir, GenFormModel.__CONFIG)
         CfgBase.__init__(self, base_config_file, verbose=verbose)
-        tool_status = self.get_tool_status(verbose=verbose)
-        if tool_status:
+        if self.tool_status:
             self.add_new_option(
-                cls.__OPS[0], cls.__OPS[1], dest='mod',
+                GenFormModel.__OPS[0], GenFormModel.__OPS[1], dest='mod',
                 help='generate form model'
             )
-            GenForm.__init__(self, verbose=verbose)
 
     def process(self, verbose=False):
         """
@@ -89,15 +85,15 @@ class GenFormModel(CfgBase, GenForm):
             :type verbose: <bool>
             :return: True (success) | False
             :rtype: <bool>
+            :exceptions: None
         """
-        cls, status = GenFormModel, False
-        tool_status = self.get_tool_status(verbose=verbose)
-        if tool_status:
+        status = False
+        if self.tool_status:
             self.show_base_info(verbose=verbose)
             num_of_args = len(sys.argv)
             if num_of_args > 1:
                 op = sys.argv[1]
-                if op not in cls.__OPS:
+                if op not in GenFormModel.__OPS:
                     sys.argv = []
                     sys.argv.append('-h')
             else:
@@ -107,29 +103,26 @@ class GenFormModel(CfgBase, GenForm):
             form_file = "{0}/{1}{2}".format(current_dir, opts.mod, '.py')
             form_file_exist = Path(form_file).exists()
             if num_of_args == 1 and opts.mod and not form_file_exist:
+                generator = GenForm(verbose=verbose)
                 message = "{0} {1} [{2}]".format(
-                    "[{0}]".format(self.get_ats_name(verbose=verbose)),
-                    'Generating module', form_file
+                    "[{0}]".format(self.name), 'Generating module', form_file
                 )
                 print(message)
-                gen_form_status = self.gen_form(
+                gen_form_status = generator.gen_form(
                     "{0}".format(opts.mod), verbose=verbose
                 )
                 if gen_form_status:
-                    success_message(
-                        self.get_ats_name(verbose=verbose), 'Done\n'
-                    )
+                    success_message(self.name, 'Done\n')
                     status = True
                 else:
                     error_message(
-                        self.get_ats_name(verbose=verbose),
-                        'Failed to process and run option'
+                        self.name, 'Failed to process and run option'
                     )
             else:
                 error_message(
-                    self.get_ats_name(verbose=verbose), form_file,
-                    'already exist in current directory'
+                    self.name, form_file, 'already exist in current directory'
                 )
         else:
             error_message('gen_form_model', 'Tool is not operational')
         return True if status else False
+

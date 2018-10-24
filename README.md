@@ -18,13 +18,11 @@ cp -R ~/gen_form_model/log/   /root/scripts/gen_form_model/ver.1.0/
 
 This module requires these other modules and libraries:
 
-    * datetime
-    * Template
-    * py_util   https://github.com/vroncevic/py_util
+* ats_utilities https://vroncevic.github.io/ats_utilities
 
 ### COPYRIGHT AND LICENCE
 
-Copyright (C) 2018 by https://github.com/vroncevic/gen_form_model
+Copyright (C) 2018 by https://vroncevic.github.io/gen_form_model
 
 This tool is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.4.2 or,

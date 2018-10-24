@@ -22,14 +22,13 @@ from inspect import stack
 try:
     from pathlib import Path
 
-    from ats_utilities.slots import BaseSlots
     from form.form_selector import FormSelector
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as e:
     msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ###################################
+    sys.exit(msg)  # Force close python ATS ##################################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -41,13 +40,13 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 
-class ReadTemplate(BaseSlots):
+class ReadTemplate(object):
     """
         Define class ReadTemplate with attribute(s) and method(s).
         Read a template file (setup.template).
         It defines:
             attribute:
-                __CLASS_SLOTS__ - Setting class slots
+                __slots__ - Setting class slots
                 VERBOSE - Console text indicator for current process-phase
                 __TEMPLATE_DIR - Prefix path to templates
                 __TEMPLATES - Modules (python templates)
@@ -57,9 +56,8 @@ class ReadTemplate(BaseSlots):
                 read - Read a template and return a string representation
     """
 
-    __CLASS_SLOTS__ = (
-        'VERBOSE', '__TEMPLATE_DIR', '__TEMPLATES',  # Read-Only
-        '__template'
+    __slots__ = (
+        'VERBOSE', '__TEMPLATE_DIR', '__TEMPLATES', '__template'
     )
     VERBOSE = 'FORM::READ_TEMPLATE'
     __TEMPLATE_DIR = '/../../conf/template'
@@ -73,11 +71,13 @@ class ReadTemplate(BaseSlots):
             Setting template configuration directory.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
+            :exceptions: None
         """
-        cls, module_dir = ReadTemplate, Path(__file__).resolve().parent
-        verbose_message(cls.VERBOSE, verbose, 'Initial template')
-        BaseSlots.__init__(self)
-        self.__template = "{0}{1}".format(module_dir, cls.__TEMPLATE_DIR)
+        verbose_message(ReadTemplate.VERBOSE, verbose, 'Initial template')
+        module_dir = Path(__file__).resolve().parent
+        self.__template = "{0}{1}".format(
+            module_dir, ReadTemplate.__TEMPLATE_DIR
+        )
 
     def read(self, form_type, verbose=False):
         """
@@ -90,7 +90,7 @@ class ReadTemplate(BaseSlots):
             :rtype: <str> | <NoneType>
             :exception: ATSBadCallError | ATSTypeError
         """
-        cls, func, form_content = ReadTemplate, stack()[0][3], None
+        func, form_content = stack()[0][3], None
         form_type_txt = 'Argument: expected form_type <int> object'
         form_type_msg = "{0} {1} {2}".format('def', func, form_type_txt)
         if form_type is None:
@@ -98,10 +98,10 @@ class ReadTemplate(BaseSlots):
         if not isinstance(form_type, int):
             raise ATSTypeError(form_type_msg)
         template_file = "{0}/{1}".format(
-            self.__template, cls.__TEMPLATES[form_type]
+            self.__template, ReadTemplate.__TEMPLATES[form_type]
         )
         verbose_message(
-            cls.VERBOSE, verbose, 'Loading template', template_file
+            ReadTemplate.VERBOSE, verbose, 'Loading template', template_file
         )
         try:
             with open(template_file, 'r') as form_file:
@@ -109,3 +109,4 @@ class ReadTemplate(BaseSlots):
         except AttributeError:
             pass
         return form_content
+

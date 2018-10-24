@@ -19,12 +19,11 @@
 import sys
 
 try:
-    from ats_utilities.slots import BaseSlots
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
 except ImportError as e:
     msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ###################################
+    sys.exit(msg)  # Force close python ATS ##################################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -36,17 +35,17 @@ __email__ = "elektron.ronca@gmail.com"
 __status__ = "Updated"
 
 
-class FormSelector(BaseSlots):
+class FormSelector(object):
     """
         Define class ModelSelector with attribute(s) and method(s).
         Selecting python template form for generating process.
         It defines:
             attribute:
-                __CLASS_SLOTS__ - Setting class slots
+                __slots__ - Setting class slots
                 VERBOSE - Console text indicator for current process-phase
-                Django - 0 Django form
-                Flask - 1 Flask form
-                Cancel - 2 Cancel option
+                Django  - 0 Django form
+                Flask   - 1 Flask form
+                Cancel  - 2 Cancel option
                 __MODULES - Dictionary with options
             method:
                 __init__ - Initial constructor
@@ -54,10 +53,8 @@ class FormSelector(BaseSlots):
                 format_name - Formatting name (class and file name)
     """
 
-    __CLASS_SLOTS__ = (
-        'VERBOSE', 'Django', 'Flask', 'Cancel', '__MODULES'  # Read-Only
-    )
-    VERBOSE = 'FORM::FORMSELECTOR'
+    __slots__ = ('VERBOSE', 'Django', 'Flask', 'Cancel', '__MODULES')
+    VERBOSE = 'FORM::FORM_SELECTOR'
     Django, Flask, Cancel = range(3)
     __MODULES = {
         Django: 'Django form',
@@ -70,10 +67,9 @@ class FormSelector(BaseSlots):
             Initial constructor.
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
+            :exceptions: None
         """
-        cls = FormSelector
-        verbose_message(cls.VERBOSE, verbose, 'Initial form selector')
-        BaseSlots.__init__(self)
+        verbose_message(FormSelector.VERBOSE, verbose, 'Initial form selector')
 
     @classmethod
     def choose_form(cls, verbose=False):
@@ -83,15 +79,16 @@ class FormSelector(BaseSlots):
             :type verbose: <bool>
             :return: Form type
             :rtype: <int>
+            :exceptions: None
         """
-        verbose_message(cls.VERBOSE, verbose, 'Selecting form model')
+        verbose_message(FormSelector.VERBOSE, verbose, 'Selecting form model')
         print("\n form option list:")
-        for key in sorted(cls.__MODULES):
-            print("  {0} {1}".format(key, cls.__MODULES[key]))
+        for key in sorted(FormSelector.__MODULES):
+            print("  {0} {1}".format(key, FormSelector.__MODULES[key]))
         while True:
             form_type = int(input(' Select form: '))
-            if form_type not in cls.__MODULES.keys():
-                error_message(cls.VERBOSE, 'Not an appropriate choice')
+            if form_type not in FormSelector.__MODULES.keys():
+                error_message(FormSelector.VERBOSE, 'Not supported choice')
             else:
                 break
         return form_type
@@ -107,5 +104,6 @@ class FormSelector(BaseSlots):
             :return: File name with extension | None
             :rtype: <str> | <NoneType>
         """
-        verbose_message(cls.VERBOSE, verbose, 'form name', form_name)
+        verbose_message(FormSelector.VERBOSE, verbose, 'form name', form_name)
         return "{0}{1}".format(form_name.lower(), '.py') if form_name else None
+
