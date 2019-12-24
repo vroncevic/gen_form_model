@@ -20,6 +20,32 @@ This module requires these other modules and libraries:
 
 * ats_utilities https://vroncevic.github.io/ats_utilities
 
+### Tool structure
+
+![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/python-tool-docs/gen_form_model.png)
+
+```
+.
+├── bin
+│   ├── form
+│   │   ├── form_selector.py
+│   │   ├── gen_form.py
+│   │   ├── __init__.py
+│   │   ├── read_template.py
+│   │   └── write_template.py
+│   ├── gen_form_model.py
+│   └── gen_form_model_run.py
+├── conf
+│   ├── gen_form_model.cfg
+│   ├── gen_form_model_util.cfg
+│   └── template
+│       ├── django.template
+│       └── flask.template
+└── log
+    └── gen_form_model.log
+
+```
+
 ### COPYRIGHT AND LICENCE
 
 Copyright (C) 2018 by https://vroncevic.github.io/gen_form_model
