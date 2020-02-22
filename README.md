@@ -1,5 +1,11 @@
 # Generate Form Model (Django/Flask).
 
+gen_form_model is toolset for generation data model for:
+* Django FWK
+* Flask FWK
+
+Developed in python code: 100%.
+
 The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
@@ -20,9 +26,19 @@ This module requires these other modules and libraries:
 
 * ats_utilities https://vroncevic.github.io/ats_utilities
 
-### Tool structure
+### GENERATION FLOW OF FORM MODEL
+
+Base flow of generation process:
+
+![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/python-tool-docs/gen_form_model_flow.png)
+
+### TOOL STRUCTURE
+
+gen_form_model is based on Template mechanism:
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/python-tool-docs/gen_form_model.png)
+
+Generator structure:
 
 ```
 .
