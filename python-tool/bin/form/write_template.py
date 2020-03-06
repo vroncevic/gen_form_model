@@ -1,20 +1,24 @@
 # -*- coding: UTF-8 -*-
-# write_template.py
-# Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
-#
-# gen_form_model is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# gen_form_model is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program. If not, see <http://www.gnu.org/licenses/>.
-#
+
+"""
+ Module
+     write_template.py
+ Copyright
+     Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
+     gen_form_model is free software: you can redistribute it and/or modify it
+     under the terms of the GNU General Public License as published by the
+     Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+     gen_form_model is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     See the GNU General Public License for more details.
+     You should have received a copy of the GNU General Public License along
+     with this program. If not, see <http://www.gnu.org/licenses/>.
+ Info
+     Define class WriteTemplate with attribute(s) and method(s).
+     Write a template content with parameters to a file.
+"""
 
 import sys
 from inspect import stack
@@ -24,13 +28,14 @@ from string import Template
 
 try:
     from form.form_selector import FormSelector
+
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
-except ImportError as e:
-    msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ##################################
+except ImportError as error:
+    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+    sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -49,14 +54,16 @@ class WriteTemplate(object):
         It defines:
             attribute:
                 __slots__ - Setting class slots
+                __file_name - File name
                 VERBOSE - Console text indicator for current process-phase
             method:
                 __init__ - Initial constructor
+                get_file_name - Getter for file name
                 write - Write a template content with parameters to a file
     """
 
-    __slots__ = ('VERBOSE')
-    VERBOSE = 'FORM::WRITE_TEMPLATE'
+    __slots__ = ('VERBOSE', '__file_name')
+    VERBOSE = 'GEN_FORM_MODEL::FORM::WRITE_TEMPLATE'
 
     def __init__(self, verbose=False):
         """
@@ -66,6 +73,16 @@ class WriteTemplate(object):
             :exceptions: None
         """
         verbose_message(WriteTemplate.VERBOSE, verbose, 'Initial template')
+        self.__file_name = None
+
+    def get_file_name(self):
+        """
+            Getter for file name.
+            :return: File name
+            :rtype: <str>
+            :exceptions: None
+        """
+        return self.__file_name
 
     def write(self, form_content, form_name, verbose=False):
         """
@@ -93,13 +110,13 @@ class WriteTemplate(object):
             raise ATSBadCallError(form_name_msg)
         if not isinstance(form_name, str):
             raise ATSTypeError(form_name_msg)
-        file_name = FormSelector.format_name(form_name)
-        if file_name:
+        self.__file_name = FormSelector.format_name(form_name)
+        if self.__file_name:
             verbose_message(
                 WriteTemplate.VERBOSE, verbose, 'Generating form model'
             )
             current_dir = getcwd()
-            module_file = "{0}/{1}".format(current_dir, file_name)
+            module_file = "{0}/{1}".format(current_dir, self.__file_name)
             module_info = {
                 'mod': "{0}".format(form_name),
                 'modlc': "{0}".format(form_name.lower()),
@@ -116,4 +133,3 @@ class WriteTemplate(object):
                 WriteTemplate.VERBOSE, 'Failed to select module file name'
             )
         return True if status else False
-

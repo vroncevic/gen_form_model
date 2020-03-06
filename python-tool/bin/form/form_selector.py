@@ -1,29 +1,33 @@
 # -*- coding: UTF-8 -*-
-# form_selector.py
-# Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
-#
-# gen_form_model is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# gen_form_model is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program. If not, see <http://www.gnu.org/licenses/>.
-#
+
+"""
+ Module
+     form_selector.py
+ Copyright
+     Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
+     gen_form_model is free software: you can redistribute it and/or modify it
+     under the terms of the GNU General Public License as published by the
+     Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+     gen_form_model is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     See the GNU General Public License for more details.
+     You should have received a copy of the GNU General Public License along
+     with this program. If not, see <http://www.gnu.org/licenses/>.
+ Info
+     Define class ModelSelector with attribute(s) and method(s).
+     Selecting python template form for generating process.
+"""
 
 import sys
 
 try:
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
-except ImportError as e:
-    msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ##################################
+except ImportError as error:
+    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+    sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -54,7 +58,7 @@ class FormSelector(object):
     """
 
     __slots__ = ('VERBOSE', 'Django', 'Flask', 'Cancel', '__MODULES')
-    VERBOSE = 'FORM::FORM_SELECTOR'
+    VERBOSE = 'GEN_FORM_MODEL::FORM::FORM_SELECTOR'
     Django, Flask, Cancel = range(3)
     __MODULES = {
         Django: 'Django form',
@@ -86,7 +90,10 @@ class FormSelector(object):
         for key in sorted(FormSelector.__MODULES):
             print("  {0} {1}".format(key, FormSelector.__MODULES[key]))
         while True:
-            form_type = int(input(' Select form: '))
+            try:
+                form_type = int(raw_input(' Select form: '))
+            except NameError:
+                form_type = int(input(' Select form: '))
             if form_type not in FormSelector.__MODULES.keys():
                 error_message(FormSelector.VERBOSE, 'Not supported choice')
             else:
@@ -103,7 +110,7 @@ class FormSelector(object):
             :type form_name: <str>
             :return: File name with extension | None
             :rtype: <str> | <NoneType>
+            :exceptions: None
         """
         verbose_message(FormSelector.VERBOSE, verbose, 'form name', form_name)
         return "{0}{1}".format(form_name.lower(), '.py') if form_name else None
-

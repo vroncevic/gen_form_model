@@ -10,14 +10,19 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
+![Python package](https://github.com/vroncevic/gen_form_model/workflows/Python%20package/badge.svg?branch=master)
+
 ### INSTALLATION
+Navigate to release [page](https://github.com/vroncevic/gen_form_model/releases/tag/v1.0) download and extract release archive.
 
 To install this set of modules type the following:
 
 ```
-cp -R ~/gen_form_model/bin/   /root/scripts/gen_form_model/ver.1.0/
-cp -R ~/gen_form_model/conf/  /root/scripts/gen_form_model/ver.1.0/
-cp -R ~/gen_form_model/log/   /root/scripts/gen_form_model/ver.1.0/
+tar xvzf gen_form_model-1.0.tar.gz
+cd gen_form_model-1.0/python-tool
+cp -R ~/bin/   /root/scripts/gen_form_model/
+cp -R ~/conf/  /root/scripts/gen_form_model/
+cp -R ~/log/   /root/scripts/gen_form_model/
 ```
 
 ### DEPENDENCIES

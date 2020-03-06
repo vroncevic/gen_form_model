@@ -1,34 +1,41 @@
 # -*- coding: UTF-8 -*-
-# read_template.py
-# Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
-#
-# gen_form_model is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# gen_form_model is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program. If not, see <http://www.gnu.org/licenses/>.
-#
+
+"""
+ Module
+     read_template.py
+ Copyright
+     Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
+     gen_form_model is free software: you can redistribute it and/or modify it
+     under the terms of the GNU General Public License as published by the
+     Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+     gen_form_model is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     See the GNU General Public License for more details.
+     You should have received a copy of the GNU General Public License along
+     with this program. If not, see <http://www.gnu.org/licenses/>.
+ Info
+     Define class ReadTemplate with attribute(s) and method(s).
+     Read a template file (setup.template).
+"""
 
 import sys
+from os.path import exists
 from inspect import stack
 
 try:
     from pathlib import Path
 
     from form.form_selector import FormSelector
+
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.console_io.error import error_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
-except ImportError as e:
-    msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ##################################
+except ImportError as error:
+    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+    sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = "Vladimir Roncevic"
 __copyright__ = "Copyright 2018, Free software to use and distributed it."
@@ -53,13 +60,14 @@ class ReadTemplate(object):
                 __template - Absolute template file path
             method:
                 __init__ - Create and initial instance
+                get_template - Getter for template object
                 read - Read a template and return a string representation
     """
 
     __slots__ = (
         'VERBOSE', '__TEMPLATE_DIR', '__TEMPLATES', '__template'
     )
-    VERBOSE = 'FORM::READ_TEMPLATE'
+    VERBOSE = 'GEN_FORM_MODEL::FORM::READ_TEMPLATE'
     __TEMPLATE_DIR = '/../../conf/template'
     __TEMPLATES = {
         FormSelector.Django: 'django.template',
@@ -78,6 +86,15 @@ class ReadTemplate(object):
         self.__template = "{0}{1}".format(
             module_dir, ReadTemplate.__TEMPLATE_DIR
         )
+
+    def get_template(self):
+        """
+            Getter for template object.
+            :return: Template object
+            :rtype: <str>
+            :exceptions: None
+        """
+        return self.__template
 
     def read(self, form_type, verbose=False):
         """
@@ -103,10 +120,11 @@ class ReadTemplate(object):
         verbose_message(
             ReadTemplate.VERBOSE, verbose, 'Loading template', template_file
         )
-        try:
+        if template_file and exists(template_file):
             with open(template_file, 'r') as form_file:
                 form_content = form_file.read()
-        except AttributeError:
-            pass
+        else:
+            error_message(
+                ReadTemplate.VERBOSE, "check file {0}".format(template_file)
+            )
         return form_content
-
