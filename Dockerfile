@@ -30,9 +30,11 @@ RUN rm -f requirements.txt
 RUN mkdir /gen_form_model/
 COPY gen_form_model /gen_form_model/
 COPY setup.py /
+COPY README.md /
 RUN find /gen_form_model/ -name "*.editorconfig" -type f -exec rm -Rf {} \;
 RUN python setup.py install_lib && python setup.py install_egg_info && python setup.py install_data
 RUN rm -rf /gen_form_model/
 RUN rm -f setup.py
+RUN rm -f README.md
 RUN chmod -R 755 /usr/local/lib/python2.7/dist-packages/gen_form_model/
 RUN tree /usr/local/lib/python2.7/dist-packages/gen_form_model/
