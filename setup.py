@@ -20,26 +20,32 @@
      Define setup for gen_form_model package.
 """
 
+from os.path import abspath, dirname, join
 from setuptools import setup
 
 __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2018, Free software to use and distributed it.'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'GNU General Public License (GPL)'
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
+THIS_DIR, LONG_DESCRIPTION = abspath(dirname(__file__)), None
+with open(join(THIS_DIR, 'README.md')) as readme:
+    LONG_DESCRIPTION = readme.read()
+
 setup(
     name='gen_form_model',
-    version='1.0.0',
+    version='1.1.0',
     description='Form model based on Django, Flask',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
     url='https://vroncevic.github.io/gen_form_model/',
     license='GPL 2018 Free software to use and distributed it.',
-    long_description='Django, Flask form model.',
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     keywords='form model, django form, flask form',
     platforms='POSIX',
     classifiers=[
@@ -74,8 +80,8 @@ setup(
     data_files=[
         ('/usr/local/bin/', ['gen_form_model/run/gen_form_model_run.py']),
         (
-             '/usr/local/lib/python2.7/dist-packages/gen_form_model/conf/',
-             ['gen_form_model/conf/gen_form_model.cfg']
+            '/usr/local/lib/python2.7/dist-packages/gen_form_model/conf/',
+            ['gen_form_model/conf/gen_form_model.cfg']
         ),
         (
             '/usr/local/lib/python2.7/dist-packages/gen_form_model/conf/',
