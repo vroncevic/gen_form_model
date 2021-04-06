@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>gen_form_model.form.gen_form module &mdash; gen_form_model https://github.com/vroncevic/gen_form_model/releases/ documentation</title>
+  <title>gen_form_model.pro package &mdash; gen_form_model https://github.com/vroncevic/gen_form_model/releases/ documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="gen_form_model.form.read_template module" href="gen_form_model.form.read_template.html" />
-    <link rel="prev" title="gen_form_model.form.form_selector module" href="gen_form_model.form.form_selector.html" /> 
+    <link rel="next" title="gen_form_model.pro.read_template module" href="gen_form_model.pro.read_template.html" />
+    <link rel="prev" title="gen_form_model package" href="gen_form_model.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.0.0
+                1.2.0
               </div>
             
           
@@ -92,7 +92,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">gen_form_model</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="gen_form_model.html">gen_form_model package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="gen_form_model.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4 current"><a class="reference internal" href="gen_form_model.form.html">gen_form_model.form package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">gen_form_model.pro package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="gen_form_model.html#module-gen_form_model">Module contents</a></li>
@@ -150,15 +150,13 @@
         
           <li><a href="gen_form_model.html">gen_form_model package</a> &raquo;</li>
         
-          <li><a href="gen_form_model.form.html">gen_form_model.form package</a> &raquo;</li>
-        
-      <li>gen_form_model.form.gen_form module</li>
+      <li>gen_form_model.pro package</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/gen_form_model.form.gen_form.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/gen_form_model.pro.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -171,13 +169,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-gen_form_model.form.gen_form">
-<span id="gen-form-model-form-gen-form-module"></span><h1>gen_form_model.form.gen_form module<a class="headerlink" href="#module-gen_form_model.form.gen_form" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="gen-form-model-pro-package">
+<h1>gen_form_model.pro package<a class="headerlink" href="#gen-form-model-pro-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gen_form_model.pro.read_template.html">gen_form_model.pro.read_template module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gen_form_model.pro.write_template.html">gen_form_model.pro.write_template module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-gen_form_model.pro">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gen_form_model.pro" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>Module</dt>
-<dd>gen_form.py</dd>
+<dd>__init__.py</dd>
 <dt>Copyright</dt>
-<dd>Copyright (C) 2018 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+<dd>Copyright (C) 2017 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
 gen_form_model is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
 Free Software Foundation, either version 3 of the License, or
@@ -189,14 +198,14 @@ See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along
 with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</dd>
 <dt>Info</dt>
-<dd>Define class GenForm with attribute(s) and method(s).
+<dd>Defined class GenForm with attribute(s) and method(s).
 Generate form model by template and parameters.</dd>
 </dl>
 <dl class="class">
-<dt id="gen_form_model.form.gen_form.GenForm">
-<em class="property">class </em><code class="descclassname">gen_form_model.form.gen_form.</code><code class="descname">GenForm</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/form/gen_form.html#GenForm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.form.gen_form.GenForm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Define class GenForm with attribute(s) and method(s).
+<dt id="gen_form_model.pro.GenForm">
+<em class="property">class </em><code class="descclassname">gen_form_model.pro.</code><code class="descname">GenForm</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/pro.html#GenForm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.pro.GenForm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ats_utilities.config_io.base_check.FileChecking</span></code></p>
+<p>Defined class GenForm with attribute(s) and method(s).
 Generate form model by template and parameters.
 It defines:</p>
 <blockquote>
@@ -205,18 +214,22 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase</div>
-<div class="line">__reader - Reader API</div>
-<div class="line">__writter - Writer API</div>
+<div class="line">__slots__ - Setting class slots.</div>
+<div class="line">VERBOSE - Console text indicator for current process-phase.</div>
+<div class="line">__PRO_STRUCTURE - Project setup (templates).</div>
+<div class="line">__reader - Reader API.</div>
+<div class="line">__writter - Writer API.</div>
+<div class="line">__config - Project setup in dict format.</div>
 </div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__init__ - Initial constructor</div>
-<div class="line">get_reader - Getter for reader object</div>
-<div class="line">get_writer - Getter for writer object</div>
-<div class="line">gen_form - Generate form module file</div>
+<div class="line">__init__ - Initial constructor.</div>
+<div class="line">get_reader - Getter for reader object.</div>
+<div class="line">get_writer - Getter for writer object.</div>
+<div class="line">gen_form - Generate form module file.</div>
+<div class="line">select_pro_type - Select form type.</div>
+<div class="line">__str__ - Dunder method for GenForm.</div>
 </div>
 </td>
 </tr>
@@ -224,34 +237,34 @@ It defines:</p>
 </table>
 </div></blockquote>
 <dl class="attribute">
-<dt id="gen_form_model.form.gen_form.GenForm.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_FORM_MODEL::FORM::GEN_FORM'</em><a class="headerlink" href="#gen_form_model.form.gen_form.GenForm.VERBOSE" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_form_model.pro.GenForm.VERBOSE">
+<code class="descname">VERBOSE</code><em class="property"> = 'GEN_FORM_MODEL::PRO'</em><a class="headerlink" href="#gen_form_model.pro.GenForm.VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="gen_form_model.form.gen_form.GenForm.gen_form">
-<code class="descname">gen_form</code><span class="sig-paren">(</span><em>form_name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/form/gen_form.html#GenForm.gen_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.form.gen_form.GenForm.gen_form" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_form_model.pro.GenForm.gen_form">
+<code class="descname">gen_form</code><span class="sig-paren">(</span><em>form_name</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/pro.html#GenForm.gen_form"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.pro.GenForm.gen_form" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate form module file.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>form_name</strong> – Parameter form class name</li>
-<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option</li>
+<li><strong>form_name</strong> – Parameter form class name.</li>
+<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">&lt;str&gt;</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Boolean status True (success) | False</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Boolean status True (success) | False.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">&lt;bool&gt;</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body"><p class="first last">ATSBadCallError | ATSTypeError</p>
+<tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body"><p class="first last">ATSTypeError | ATSBadCallError</p>
 </td>
 </tr>
 </tbody>
@@ -259,16 +272,16 @@ It defines:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="gen_form_model.form.gen_form.GenForm.get_reader">
-<code class="descname">get_reader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/form/gen_form.html#GenForm.get_reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.form.gen_form.GenForm.get_reader" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_form_model.pro.GenForm.get_reader">
+<code class="descname">get_reader</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/pro.html#GenForm.get_reader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.pro.GenForm.get_reader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter for reader object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Read template object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Read template object | None.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;ReadTemplate&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;ReadTemplate&gt; | &lt;NoneType&gt;</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
 </tr>
@@ -277,16 +290,16 @@ It defines:</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="gen_form_model.form.gen_form.GenForm.get_writer">
-<code class="descname">get_writer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/form/gen_form.html#GenForm.get_writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.form.gen_form.GenForm.get_writer" title="Permalink to this definition">¶</a></dt>
+<dt id="gen_form_model.pro.GenForm.get_writer">
+<code class="descname">get_writer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/pro.html#GenForm.get_writer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.pro.GenForm.get_writer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Getter for writer object.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Write template object</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Write template object | None.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;WriteTemplate&gt;</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;WriteTemplate&gt; | &lt;NoneType&gt;</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
 </tr>
@@ -294,8 +307,29 @@ It defines:</p>
 </table>
 </dd></dl>
 
+<dl class="method">
+<dt id="gen_form_model.pro.GenForm.select_pro_type">
+<code class="descname">select_pro_type</code><span class="sig-paren">(</span><em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_form_model/pro.html#GenForm.select_pro_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#gen_form_model.pro.GenForm.select_pro_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select form type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Project type and project ID | None and None.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">&lt;str&gt; | &lt;NoneType&gt;</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Exceptions:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -306,10 +340,10 @@ It defines:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gen_form_model.form.read_template.html" class="btn btn-neutral float-right" title="gen_form_model.form.read_template module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gen_form_model.pro.read_template.html" class="btn btn-neutral float-right" title="gen_form_model.pro.read_template module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="gen_form_model.form.form_selector.html" class="btn btn-neutral float-left" title="gen_form_model.form.form_selector module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gen_form_model.html" class="btn btn-neutral float-left" title="gen_form_model package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -319,7 +353,7 @@ It defines:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
+        &copy; Copyright 2017, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;
 
     </p>
   </div>

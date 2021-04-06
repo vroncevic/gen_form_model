@@ -1,3 +1,5 @@
+<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model_logo.png" width="25%">
+
 # Generate Form Model (Django/Flask)
 
 **gen_form_model** is tool for generation form model for:
@@ -18,11 +20,14 @@ other information that should be provided before the modules are installed.
 **Table of Contents**
 
 - [Installation](#installation)
+    - [Install using pip](#install-using-pip)
+    - [Install using setuptools](#install-using-setuptools)
+    - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
-- [Generation process](#generation-process)
-- [Library structure](#library-structure)
+- [Generation flow of pyp setup](#generation-flow-of-pyp-setup)
+- [Tool structure](#tool-structure)
 - [Docs](#docs)
-- [Copyright and Licence](#copyright-and-licence)
+- [Copyright and licence](#copyright-and-licence)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -30,78 +35,46 @@ other information that should be provided before the modules are installed.
 
 ![Install Python2 Package](https://github.com/vroncevic/gen_form_model/workflows/Install%20Python2%20Package%20gen_form_model/badge.svg?branch=master) ![Install Python3 Package](https://github.com/vroncevic/gen_form_model/workflows/Install%20Python3%20Package%20gen_form_model/badge.svg?branch=master)
 
+Currently there are three ways to install tool:
+* Install process based on pip
+* Install process based on setup.py (setuptools)
+* Install process based on docker mechanism
+
+##### Install using pip
+
+Python package is located at **[pypi.org](https://pypi.org/project/gen-form-model/)**.
+
+You can install by using pip
+```
+# python2
+pip install gen-form-model
+# python3
+pip3 install gen-form-model
+```
+
+##### Install using setuptools
+
 Navigate to **[release page](https://github.com/vroncevic/gen_form_model/releases)** download and extract release archive.
 
-To install **gen_form_model** type the following:
+To install modules, locate and run setup.py with arguments
 ```
 tar xvzf gen_form_model-x.y.z.tar.gz
-cd gen_form_model-x.y.z
+cd gen_form_model-x.y.z/
+# python2
 pip install -r requirements.txt
-```
-
-Install lib process
-```
 python setup.py install_lib
-running install_lib
-running build_py
-creating build
-creating build/lib.linux-x86_64-2.7
-creating build/lib.linux-x86_64-2.7/gen_form_model
-copying gen_form_model/__init__.py -> build/lib.linux-x86_64-2.7/gen_form_model
-creating build/lib.linux-x86_64-2.7/gen_form_model/form
-copying gen_form_model/form/gen_form.py -> build/lib.linux-x86_64-2.7/gen_form_model/form
-copying gen_form_model/form/__init__.py -> build/lib.linux-x86_64-2.7/gen_form_model/form
-copying gen_form_model/form/write_template.py -> build/lib.linux-x86_64-2.7/gen_form_model/form
-copying gen_form_model/form/form_selector.py -> build/lib.linux-x86_64-2.7/gen_form_model/form
-copying gen_form_model/form/read_template.py -> build/lib.linux-x86_64-2.7/gen_form_model/form
-creating /usr/local/lib/python2.7/dist-packages/gen_form_model
-copying build/lib.linux-x86_64-2.7/gen_form_model/__init__.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model
-creating /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-copying build/lib.linux-x86_64-2.7/gen_form_model/form/gen_form.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-copying build/lib.linux-x86_64-2.7/gen_form_model/form/__init__.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-copying build/lib.linux-x86_64-2.7/gen_form_model/form/write_template.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-copying build/lib.linux-x86_64-2.7/gen_form_model/form/form_selector.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-copying build/lib.linux-x86_64-2.7/gen_form_model/form/read_template.py -> /usr/local/lib/python2.7/dist-packages/gen_form_model/form
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/__init__.py to __init__.pyc
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/form/gen_form.py to gen_form.pyc
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/form/__init__.py to __init__.pyc
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/form/write_template.py to write_template.pyc
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/form/form_selector.py to form_selector.pyc
-byte-compiling /usr/local/lib/python2.7/dist-packages/gen_form_model/form/read_template.py to read_template.pyc
-```
-
-Install lib egg info
-```
 python setup.py install_egg_info
-running install_egg_info
-running egg_info
-creating gen_form_model.egg-info
-writing requirements to gen_form_model.egg-info/requires.txt
-writing gen_form_model.egg-info/PKG-INFO
-writing top-level names to gen_form_model.egg-info/top_level.txt
-writing dependency_links to gen_form_model.egg-info/dependency_links.txt
-writing manifest file 'gen_form_model.egg-info/SOURCES.txt'
-reading manifest file 'gen_form_model.egg-info/SOURCES.txt'
-writing manifest file 'gen_form_model.egg-info/SOURCES.txt'
-Copying gen_form_model.egg-info to /usr/local/lib/python2.7/dist-packages/gen_form_model-1.0.0-py2.7.egg-info
-```
-
-Install lib data
-```
 python setup.py install_data
-running install_data
-copying gen_form_model/run/gen_form_model_run.py -> /usr/local/bin/
-creating /usr/local/lib/python2.7/dist-packages/gen_form_model/conf
-copying gen_form_model/conf/gen_form_model.cfg -> /usr/local/lib/python2.7/dist-packages/gen_form_model/conf/
-copying gen_form_model/conf/gen_form_model_util.cfg -> /usr/local/lib/python2.7/dist-packages/gen_form_model/conf/
-creating /usr/local/lib/python2.7/dist-packages/gen_form_model/conf/template
-copying gen_form_model/conf/template/django.template -> /usr/local/lib/python2.7/dist-packages/gen_form_model/conf/template/
-copying gen_form_model/conf/template/flask.template -> /usr/local/lib/python2.7/dist-packages/gen_form_model/conf/template/
-creating /usr/local/lib/python2.7/dist-packages/gen_form_model/log
-copying gen_form_model/log/gen_form_model.log -> /usr/local/lib/python2.7/dist-packages/gen_form_model/log/
+# python3
+pip3 install -r requirements.txt
+python3 setup.py install_lib
+python3 setup.py install_egg_info
+python3 setup.py install_data
 ```
 
-Or You can use docker to create image/container.
+##### Install using docker
+
+You can use Dockerfile to create image/container.
 
 [![gen_form_model docker checker](https://github.com/vroncevic/gen_form_model/workflows/gen_form_model%20docker%20checker/badge.svg)](https://github.com/vroncevic/gen_form_model/actions?query=workflow%3A%22gen_form_model+docker+checker%22)
 
@@ -119,30 +92,29 @@ Generation flow:
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model_flow.png)
 
-### Library structure
+### Tool structure
 
 **gen_form_model** is based on OOP:
 
 ![alt tag](https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model.png)
 
-Library structure:
+Generator structure:
 ```
-.
+gen_form_model/
 ├── conf/
 │   ├── gen_form_model.cfg
 │   ├── gen_form_model_util.cfg
+│   ├── project.yaml
 │   └── template/
 │       ├── django.template
 │       └── flask.template
-├── form/
-│   ├── form_selector.py
-│   ├── gen_form.py
-│   ├── __init__.py
-│   ├── read_template.py
-│   └── write_template.py
 ├── __init__.py
 ├── log/
 │   └── gen_form_model.log
+├── pro/
+│   ├── __init__.py
+│   ├── read_template.py
+│   └── write_template.py
 └── run/
     └── gen_form_model_run.py
 ```
@@ -159,7 +131,7 @@ More documentation and info at:
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2018 by [vroncevic.github.io/gen_form_model](https://vroncevic.github.io/gen_form_model/)
+Copyright (C) 2017 by [vroncevic.github.io/gen_form_model](https://vroncevic.github.io/gen_form_model/)
 
 **gen_form_model** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 2.x/3.x or,
