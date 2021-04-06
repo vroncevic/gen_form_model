@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    gen_form_model.form
+    gen_form_model.pro
 
 Module contents
 ---------------

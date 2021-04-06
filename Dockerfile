@@ -21,9 +21,13 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends \
  python \
  python-pip \
  python-wheel \
+ python3 \
+ python3-pip \
+ python3-wheel \
  libyaml-dev
 
 RUN pip install --upgrade setuptools
+RUN pip3 install --upgrade setuptools
 COPY requirements.txt /
 RUN pip install -r requirements.txt
 RUN rm -f requirements.txt
@@ -32,9 +36,12 @@ COPY gen_form_model /gen_form_model/
 COPY setup.py /
 COPY README.md /
 RUN find /gen_form_model/ -name "*.editorconfig" -type f -exec rm -Rf {} \;
-RUN python setup.py install_lib && python setup.py install_egg_info && python setup.py install_data
+RUN python setup.py install_lib
+RUN python setup.py install_egg_info
+RUN python setup.py install_data
+RUN python3 setup.py install_lib
+RUN python3 setup.py install_egg_info
+RUN python3 setup.py install_data
 RUN rm -rf /gen_form_model/
 RUN rm -f setup.py
 RUN rm -f README.md
-RUN chmod -R 755 /usr/local/lib/python2.7/dist-packages/gen_form_model/
-RUN tree /usr/local/lib/python2.7/dist-packages/gen_form_model/

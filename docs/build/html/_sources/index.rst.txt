@@ -54,12 +54,25 @@ To install this set of modules type the following:
 
     tar xvzf gen_form_model-x.y.z.tar.gz
     cd gen_form_model-x.y.z/
+    # python2
     pip install -r requirements.txt
     python setup.py install_lib
     python setup.py install_egg_info
     python setup.py install_data
+    # python3
+    pip3 install -r requirements.txt
+    python3 setup.py install_lib
+    python3 setup.py install_egg_info
+    python3 setup.py install_data
 
-You can use Docker to create image/container.
+You can use Docker to create image/container, or You can use pip to install:
+
+.. code-block:: bash
+
+    # pyton2
+    pip install gen-form-model
+    # pyton3
+    pip3 install gen-form-model
 
 |GitHub docker checker|
 
@@ -93,25 +106,21 @@ Code structure:
 
 .. code-block:: bash
 
-    .
+    gen_form_model/
     ├── conf/
-    │   ├── gen_form_model.cfg
-    │   ├── gen_form_model_util.cfg
-    │   └── template/
-    │       ├── configure.ac
-    │       ├── Makefile.am
-    │       ├── README.md
-    │       └── src/
-    │           ├── main.c
-    │           └── Makefile.am
+    │   ├── gen_form_model.cfg
+    │   ├── gen_form_model_util.cfg
+    │   ├── project.yaml
+    │   └── template/
+    │       ├── django.template
+    │       └── flask.template
     ├── __init__.py
     ├── log/
-    │   └── gen_form_model.log
+    │   └── gen_form_model.log
     ├── pro/
-    │   ├── gen_pro.py
-    │   ├── __init__.py
-    │   ├── read_template.py
-    │   └── write_template.py
+    │   ├── __init__.py
+    │   ├── read_template.py
+    │   └── write_template.py
     └── run/
         └── gen_form_model_run.py
 
@@ -126,7 +135,7 @@ Copyright and licence
 .. |License: Apache 2.0| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0
 
-Copyright (C) 2018 by `vroncevic.github.io/gen_form_model <https://vroncevic.github.io/gen_form_model>`_
+Copyright (C) 2017 by `vroncevic.github.io/gen_form_model <https://vroncevic.github.io/gen_form_model>`_
 
 **gen_form_model** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 2.x/3.x or,
