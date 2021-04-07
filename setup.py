@@ -29,7 +29,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -95,7 +95,7 @@ PYP_CLASSIFIERS = SUPPORTED_PY_VERSIONS + APPROVED_LICENSES
 
 setup(
     name='gen_form_model',
-    version='1.2.0',
+    version='1.2.1',
     description='Form model based on Django, Flask',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
@@ -132,6 +132,10 @@ setup(
         (
             '{0}{1}'.format(INSTALL_DIR, 'gen_form_model/conf/'),
             ['gen_form_model/conf/gen_form_model_util.cfg']
+        ),
+        (
+            '{0}{1}'.format(INSTALL_DIR, 'gen_form_model/conf/'),
+            ['gen_form_model/conf/project.yaml']
         ),
         (
             '{0}{1}'.format(INSTALL_DIR, 'gen_form_model/conf/template/'),
