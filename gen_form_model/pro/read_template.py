@@ -26,8 +26,8 @@ from os.path import exists
 try:
     from pathlib import Path
     from ats_utilities.checker import ATSChecker
-    from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
+    from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as ats_error_message:
@@ -38,52 +38,50 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.2.1'
+__version__ = '1.3.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class ReadTemplate(object):
+class ReadTemplate:
     '''
         Defined class ReadTemplate with attribute(s) and method(s).
         Created API for read a template file and return in string format.
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots.
-                | VERBOSE - Console text indicator for current process-phase.
-                | __TEMPLATE_DIR - Prefix path to templates.
-                | __template - Absolute template file path.
+                | VERBOSE - console text indicator for current process-phase.
+                | TEMPLATE_DIR - prefix path to templates.
+                | __template - absolute template file path.
             :methods:
-                | __init__ - Initial constructor.
-                | get_template - Getter for template object.
-                | read - Read a template and return a string representation.
-                | __str__ - Dunder method for ReadTemplate.
+                | __init__ - initial constructor.
+                | get_template - getter for template object.
+                | read - read a template and return a string representation.
+                | __str__ - dunder method for ReadTemplate.
     '''
 
-    __slots__ = ('VERBOSE', '__TEMPLATE_DIR', '__template')
     VERBOSE = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
-    __TEMPLATE_DIR = '/../conf/template/'
+    TEMPLATE_DIR = '/../conf/template/'
 
     def __init__(self, verbose=False):
         '''
             Initial constructor.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
         '''
         verbose_message(ReadTemplate.VERBOSE, verbose, 'init template')
         self.__template = '{0}{1}'.format(
-            Path(__file__).resolve().parent, ReadTemplate.__TEMPLATE_DIR
+            Path(__file__).resolve().parent, ReadTemplate.TEMPLATE_DIR
         )
 
     def get_template(self):
         '''
             Getter for template object.
 
-            :return: Template object.
+            :return: template object.
             :rtype: <str>
             :exceptions: None
         '''
@@ -93,11 +91,11 @@ class ReadTemplate(object):
         '''
             Read a template and return a string representation.
 
-            :param form_template: Form template file.
+            :param form_template: form template file.
             :type form_template: <str>
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: Form content | None.
+            :return: form content | None.
             :rtype: <str> | <NoneType>
             :exception: ATSTypeError | ATSBadCallError
         '''
@@ -128,7 +126,7 @@ class ReadTemplate(object):
         '''
             Dunder method for ReadTemplate.
 
-            :return: Object in a human-readable format.
+            :return: object in a human-readable format.
             :rtype: <str>
             :exceptions: None
         '''

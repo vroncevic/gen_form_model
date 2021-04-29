@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                1.2.1
+                1.3.1
               </div>
             
           
@@ -214,22 +214,21 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">attributes:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__slots__ - Setting class slots.</div>
-<div class="line">VERBOSE - Console text indicator for current process-phase.</div>
-<div class="line">__PRO_STRUCTURE - Project setup (templates).</div>
-<div class="line">__reader - Reader API.</div>
-<div class="line">__writter - Writer API.</div>
-<div class="line">__config - Project setup in dict format.</div>
+<div class="line">GEN_VERBOSE - console text indicator for process-phase.</div>
+<div class="line">PRO_STRUCTURE - project setup (templates).</div>
+<div class="line">__reader - reader API.</div>
+<div class="line">__writter - writer API.</div>
+<div class="line">__config - project setup in dict format.</div>
 </div>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">methods:</th><td class="field-body"><div class="first last line-block">
-<div class="line">__init__ - Initial constructor.</div>
-<div class="line">get_reader - Getter for reader object.</div>
-<div class="line">get_writer - Getter for writer object.</div>
-<div class="line">gen_form - Generate form module file.</div>
-<div class="line">select_pro_type - Select form type.</div>
-<div class="line">__str__ - Dunder method for GenForm.</div>
+<div class="line">__init__ - initial constructor.</div>
+<div class="line">get_reader - getter for reader object.</div>
+<div class="line">get_writer - getter for writer object.</div>
+<div class="line">gen_form - generate form module file.</div>
+<div class="line">select_pro_type - select form type.</div>
+<div class="line">__str__ - dunder method for GenForm.</div>
 </div>
 </td>
 </tr>
@@ -237,8 +236,18 @@ It defines:</p>
 </table>
 </div></blockquote>
 <dl class="attribute">
+<dt id="gen_form_model.pro.GenForm.GEN_VERBOSE">
+<code class="descname">GEN_VERBOSE</code><em class="property"> = 'GEN_FORM_MODEL::PRO'</em><a class="headerlink" href="#gen_form_model.pro.GenForm.GEN_VERBOSE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="gen_form_model.pro.GenForm.PRO_STRUCTURE">
+<code class="descname">PRO_STRUCTURE</code><em class="property"> = '/../conf/project.yaml'</em><a class="headerlink" href="#gen_form_model.pro.GenForm.PRO_STRUCTURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="gen_form_model.pro.GenForm.VERBOSE">
-<code class="descname">VERBOSE</code><em class="property"> = 'GEN_FORM_MODEL::PRO'</em><a class="headerlink" href="#gen_form_model.pro.GenForm.VERBOSE" title="Permalink to this definition">¶</a></dt>
+<code class="descname">VERBOSE</code><em class="property"> = 'ATS_UTILITIES'</em><a class="headerlink" href="#gen_form_model.pro.GenForm.VERBOSE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -250,15 +259,15 @@ It defines:</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>form_name</strong> – Parameter form class name.</li>
-<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option.</li>
+<li><strong>form_name</strong> – parameter form class name.</li>
+<li><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – enable/disable verbose option.</li>
 </ul>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">&lt;str&gt;</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Boolean status True (success) | False.</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">boolean status True (success) | False.</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">&lt;bool&gt;</p>
@@ -279,7 +288,7 @@ It defines:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Read template object | None.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">read template object | None.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;ReadTemplate&gt; | &lt;NoneType&gt;</td>
 </tr>
@@ -297,7 +306,7 @@ It defines:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Write template object | None.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">write template object | None.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">&lt;WriteTemplate&gt; | &lt;NoneType&gt;</td>
 </tr>
@@ -315,9 +324,9 @@ It defines:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – Enable/disable verbose option.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>verbose</strong> (<em>&lt;bool&gt;</em>) – enable/disable verbose option.</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Project type and project ID | None and None.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">project type and project ID | None and None.</td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">&lt;str&gt; | &lt;NoneType&gt;</td>
 </tr>

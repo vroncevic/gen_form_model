@@ -26,7 +26,9 @@ from os import getcwd
 try:
     from pathlib import Path
     from gen_form_model.pro import GenForm
+    from ats_utilities.logging import ATSLogger
     from ats_utilities.cli.cfg_cli import CfgCLI
+    from ats_utilities.cooperative import CooperativeMeta
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.success import success_message
@@ -37,8 +39,8 @@ except ImportError as ats_error_message:
 __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.2.1'
+__license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
+__version__ = '1.3.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -51,48 +53,60 @@ class GenFormModel(CfgCLI):
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots.
-                | VERBOSE - Console text indicator for current process-phase.
-                | __CONFIG - Configuration file path.
-                | __OPS -  Tool options (list).
+                | __metaclass__ - setting cooperative metaclasses.
+                | GEN_VERBOSE - console text indicator for process-phase.
+                | CONFIG - tool info file path.
+                | LOG - tool log file path.
+                | OPS - list of tool options.
+                | logger - logger object API.
             :methods:
-                | __init__ - Initial constructor.
-                | process - Process and run tool option.
-                | __str__ - Dunder method for GenFormModel.
+                | __init__ - initial constructor.
+                | process - process and generate module setup.py.
+                | __str__ - dunder method for DistPyModule.
     '''
 
-    __slots__ = ('VERBOSE', '__CONFIG', '__OPS')
-    VERBOSE = 'GEN_FORM_MODEL'
-    __CONFIG = '/conf/gen_form_model.cfg'
-    __OPS = ['-g', '--gen', '-v']
+    __metaclass__ = CooperativeMeta
+    GEN_VERBOSE = 'GEN_FORM_MODEL'
+    CONFIG = '/conf/gen_form_model.cfg'
+    LOG = '/log/gen_form_model.log'
+    OPS = ['-g', '--gen', '-v', '--verbose', '--version']
 
     def __init__(self, verbose=False):
         '''
             Loading configuration and setting argument options.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
         '''
-        verbose_message(GenFormModel.VERBOSE, verbose, 'init tool info')
         current_dir = Path(__file__).resolve().parent
-        base_info = '{0}{1}'.format(current_dir, GenFormModel.__CONFIG)
+        base_info = '{0}{1}'.format(current_dir, GenFormModel.CONFIG)
         CfgCLI.__init__(self, base_info, verbose=verbose)
+        verbose_message(GenFormModel.GEN_VERBOSE, verbose, 'init tool info')
+        self.logger = ATSLogger(
+            GenFormModel.GEN_VERBOSE.lower(),
+            '{0}{1}'.format(current_dir, GenFormModel.LOG),
+            verbose=verbose
+        )
         if self.tool_operational:
             self.add_new_option(
-                GenFormModel.__OPS[0], GenFormModel.__OPS[1], dest='mod',
+                GenFormModel.OPS[0], GenFormModel.OPS[1], dest='mod',
                 help='generate form model'
             )
             self.add_new_option(
-                GenFormModel.__OPS[2], action='store_true', default=False,
+                GenFormModel.OPS[2], GenFormModel.OPS[3],
+                action='store_true', default=False,
                 help='activate verbose mode for generation'
+            )
+            self.add_new_option(
+                GenFormModel.OPS[4], action='version', version=__version__
             )
 
     def process(self, verbose=False):
         '''
             Process and run operation.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :return: True (success) | False.
             :rtype: <bool>
@@ -103,45 +117,60 @@ class GenFormModel(CfgCLI):
             num_of_args_sys = len(sys.argv)
             if num_of_args_sys > 1:
                 operation = sys.argv[1]
-                if operation not in GenFormModel.__OPS:
-                    sys.argv = []
+                if operation not in GenFormModel.OPS:
                     sys.argv.append('-h')
             else:
                 sys.argv.append('-h')
-            opts, args = self.parse_args(sys.argv)
-            verbose_message(GenFormModel.VERBOSE, verbose, args)
+            args = self.parse_args(sys.argv[1:])
             current_dir = Path(__file__).resolve().parent
-            form_file = '{0}/{1}{2}'.format(current_dir, opts.mod, '.py')
+            form_file = '{0}/{1}{2}'.format(current_dir, args.mod, '.py')
             form_file_exist = Path(form_file).exists()
             if not form_file_exist:
-                if num_of_args_sys >= 1 and bool(opts.mod):
+                if bool(args.mod):
                     print(
                         '{0} {1} [{2}]'.format(
-                            '[{0}]'.format(GenFormModel.VERBOSE.lower()),
-                            'generating form', opts.mod
+                            '[{0}]'.format(GenFormModel.GEN_VERBOSE.lower()),
+                            'generating form', args.mod
                         )
                     )
-                    generator = GenForm(verbose=opts.v or verbose)
+                    generator = GenForm(verbose=args.verbose or verbose)
                     status = generator.gen_form(
-                        '{0}'.format(opts.mod), verbose=opts.v or verbose
+                        '{0}'.format(args.mod), verbose=args.verbose or verbose
                     )
                     if status:
-                        success_message(GenFormModel.VERBOSE, 'done\n')
+                        success_message(GenFormModel.GEN_VERBOSE, 'done\n')
+                        self.logger.write_log(
+                            '{0} {1} done'.format(
+                                'generating form', args.mod
+                            ), ATSLogger.ATS_INFO
+                        )
                     else:
                         error_message(
-                            GenFormModel.VERBOSE, 'generation failed'
+                            GenFormModel.GEN_VERBOSE, 'generation failed'
+                        )
+                        self.logger.write_log(
+                            'generation failed', ATSLogger.ATS_ERROR
                         )
                 else:
                     error_message(
-                        GenFormModel.VERBOSE, 'provide form name'
+                        GenFormModel.GEN_VERBOSE, 'provide form name'
+                    )
+                    self.logger.write_log(
+                        'provide form name', ATSLogger.ATS_ERROR
                     )
             else:
                 error_message(
-                    GenFormModel.VERBOSE, 'form already exists'
+                    GenFormModel.GEN_VERBOSE, 'form already exists'
+                )
+                self.logger.write_log(
+                    'form already exist', ATSLogger.ATS_ERROR
                 )
         else:
             error_message(
-                GenFormModel.VERBOSE, 'tool is not operational'
+                GenFormModel.GEN_VERBOSE, 'tool is not operational'
+            )
+            self.logger.write_log(
+                'tool is not operational', ATSLogger.ATS_ERROR
             )
         return True if status else False
 
@@ -154,5 +183,5 @@ class GenFormModel(CfgCLI):
             :exceptions: None
         '''
         return '{0} ({1})'.format(
-            self.__class__.__name__, CfgCLI.__str__(self)
+            self.__class__.__name__, CfgCLI.__str__(self), str(self.logger)
         )

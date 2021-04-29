@@ -24,15 +24,15 @@ import sys
 
 try:
     from pathlib import Path
-    from ats_utilities.checker import ATSChecker
-    from ats_utilities.console_io.error import error_message
-    from ats_utilities.console_io.verbose import verbose_message
-    from ats_utilities.exceptions.ats_type_error import ATSTypeError
-    from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
-    from ats_utilities.config_io.base_check import FileChecking
-    from ats_utilities.config_io.yaml.yaml2object import Yaml2Object
     from gen_form_model.pro.read_template import ReadTemplate
     from gen_form_model.pro.write_template import WriteTemplate
+    from ats_utilities.checker import ATSChecker
+    from ats_utilities.console_io.error import error_message
+    from ats_utilities.config_io.base_check import FileChecking
+    from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.config_io.yaml.yaml2object import Yaml2Object
+    from ats_utilities.exceptions.ats_type_error import ATSTypeError
+    from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as ats_error_message:
     MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
     sys.exit(MESSAGE)  # Force close python ATS ##############################
@@ -41,7 +41,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.2.1'
+__version__ = '1.3.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -54,41 +54,37 @@ class GenForm(FileChecking):
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots.
-                | VERBOSE - Console text indicator for current process-phase.
-                | __PRO_STRUCTURE - Project setup (templates).
-                | __reader - Reader API.
-                | __writter - Writer API.
-                | __config - Project setup in dict format.
+                | GEN_VERBOSE - console text indicator for process-phase.
+                | PRO_STRUCTURE - project setup (templates).
+                | __reader - reader API.
+                | __writter - writer API.
+                | __config - project setup in dict format.
             :methods:
-                | __init__ - Initial constructor.
-                | get_reader - Getter for reader object.
-                | get_writer - Getter for writer object.
-                | gen_form - Generate form module file.
-                | select_pro_type - Select form type.
-                | __str__ - Dunder method for GenForm.
+                | __init__ - initial constructor.
+                | get_reader - getter for reader object.
+                | get_writer - getter for writer object.
+                | gen_form - generate form module file.
+                | select_pro_type - select form type.
+                | __str__ - dunder method for GenForm.
     '''
 
-    __slots__ = (
-        'VERBOSE', '__PRO_STRUCTURE', '__reader', '__writer', '__config'
-    )
-    VERBOSE = 'GEN_FORM_MODEL::PRO'
-    __PRO_STRUCTURE = '/../conf/project.yaml'
+    GEN_VERBOSE = 'GEN_FORM_MODEL::PRO'
+    PRO_STRUCTURE = '/../conf/project.yaml'
 
     def __init__(self, verbose=False):
         '''
             Initial constructor.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
         '''
         FileChecking.__init__(self, verbose=verbose)
-        verbose_message(GenForm.VERBOSE, verbose, 'init form generator')
+        verbose_message(GenForm.GEN_VERBOSE, verbose, 'init form generator')
         self.__reader = ReadTemplate(verbose=verbose)
         self.__writer = WriteTemplate(verbose=verbose)
         project = '{0}/{1}'.format(
-            Path(__file__).parent, GenForm.__PRO_STRUCTURE
+            Path(__file__).parent, GenForm.PRO_STRUCTURE
         )
         self.check_path(file_path=project, verbose=verbose)
         self.check_mode(file_mode='r', verbose=verbose)
@@ -105,7 +101,7 @@ class GenForm(FileChecking):
         '''
             Getter for reader object.
 
-            :return: Read template object | None.
+            :return: read template object | None.
             :rtype: <ReadTemplate> | <NoneType>
             :exceptions: None
         '''
@@ -115,7 +111,7 @@ class GenForm(FileChecking):
         '''
             Getter for writer object.
 
-            :return: Write template object | None.
+            :return: write template object | None.
             :rtype: <WriteTemplate> | <NoneType>
             :exceptions: None
         '''
@@ -125,11 +121,11 @@ class GenForm(FileChecking):
         '''
             Generate form module file.
 
-            :param form_name: Parameter form class name.
+            :param form_name: parameter form class name.
             :type: <str>
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: Boolean status True (success) | False.
+            :return: boolean status True (success) | False.
             :rtype: <bool>
             :exceptions: ATSTypeError | ATSBadCallError
         '''
@@ -158,9 +154,9 @@ class GenForm(FileChecking):
         '''
             Select form type.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: Project type and project ID | None and None.
+            :return: project type and project ID | None and None.
             :rtype: <str> | <NoneType>
             :exceptions: None
         '''
@@ -174,8 +170,8 @@ class GenForm(FileChecking):
                         '{0} {1}'.format(index + 1, project_type.capitalize())
                     )
                     verbose_message(
-                        GenForm.VERBOSE, verbose, 'to be processed template',
-                        template_file
+                        GenForm.GEN_VERBOSE, verbose,
+                        'to be processed template', template_file
                     )
             while True:
                 try:
@@ -198,10 +194,10 @@ class GenForm(FileChecking):
                         raise ValueError
                 except ValueError:
                     error_message(
-                        GenForm.VERBOSE, 'not an appropriate choice'
+                        GenForm.GEN_VERBOSE, 'not an appropriate choice'
                     )
             verbose_message(
-                GenForm.VERBOSE, verbose, 'selected', template_selected
+                GenForm.GEN_VERBOSE, verbose, 'selected', template_selected
             )
         return template_selected
 
@@ -209,11 +205,11 @@ class GenForm(FileChecking):
         '''
             Dunder method for GenForm.
 
-            :return: Object in a human-readable format.
+            :return: object in a human-readable format.
             :rtype: <str>
             :exceptions: None
         '''
-        return '{0} ({1}, {2}, {3})'.format(
-            self.__class__.__name__, str(self.__reader),
-            str(self.__writer), str(self.__config)
+        return '{0} ({1}, {2}, {3}, {4})'.format(
+            self.__class__.__name__, FileChecking.__str__(self),
+            str(self.__reader), str(self.__writer), str(self.__config)
         )
