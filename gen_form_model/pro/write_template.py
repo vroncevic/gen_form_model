@@ -27,8 +27,8 @@ from string import Template
 
 try:
     from ats_utilities.checker import ATSChecker
-    from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.error import error_message
+    from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as ats_error_message:
@@ -39,48 +39,46 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.2.1'
+__version__ = '1.3.1'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class WriteTemplate(object):
+class WriteTemplate:
     '''
         Defined class WriteTemplate with attribute(s) and method(s).
         Created API for write a template content with parameters to a file.
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots.
-                | VERBOSE - Console text indicator for current process-phase.
-                | __file_name - File name.
+                | GEN_VERBOSE - console text for current process-phase.
+                | __file_name - file name.
             :methods:
-                | __init__ - Initial constructor.
-                | get_file_name - Getter for file name.
-                | write - Write a template content with parameters to a file.
-                | __str__ - Dunder method for WriteTemplate.
+                | __init__ - initial constructor.
+                | get_file_name - getter for file name.
+                | write - write a template content with parameters to a file.
+                | __str__ - dunder method for WriteTemplate.
     '''
 
-    __slots__ = ('VERBOSE', '__file_name')
-    VERBOSE = 'GEN_FORM_MODEL::PRO::WRITE_TEMPLATE'
+    GEN_VERBOSE = 'GEN_FORM_MODEL::PRO::WRITE_TEMPLATE'
 
     def __init__(self, verbose=False):
         '''
             Initial constructor.
 
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
         '''
-        verbose_message(WriteTemplate.VERBOSE, verbose, 'init writter')
+        verbose_message(WriteTemplate.GEN_VERBOSE, verbose, 'init writter')
         self.__file_name = None
 
     def get_file_name(self):
         '''
             Getter for file name.
 
-            :return: File name | None.
+            :return: file name | None.
             :rtype: <str> | <NoneType>
             :exceptions: None
         '''
@@ -90,13 +88,13 @@ class WriteTemplate(object):
         '''
             Write a template content with parameters to a file.
 
-            :param form_content: Template form content.
+            :param form_content: template form content.
             :type form_content: <str>
-            :param form_name: Parameter form name.
+            :param form_name: parameter form name.
             :type form_name: <str>
-            :param verbose: Enable/disable verbose option.
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: Boolean status True (success) | False.
+            :return: boolean status True (success) | False.
             :rtype: <bool>
             :exception: ATSTypeError | ATSBadCallError
         '''
@@ -112,7 +110,7 @@ class WriteTemplate(object):
         status = False
         if all([bool(self.__file_name), bool(form_content)]):
             verbose_message(
-                WriteTemplate.VERBOSE, verbose, 'generating form model'
+                WriteTemplate.GEN_VERBOSE, verbose, 'generating form model'
             )
             current_dir = getcwd()
             module_file = '{0}/{1}'.format(current_dir, self.__file_name)
@@ -129,15 +127,15 @@ class WriteTemplate(object):
                 status = True
         else:
             error_message(
-                WriteTemplate.VERBOSE, 'failed to write module', form_name
+                WriteTemplate.GEN_VERBOSE, 'failed to write module', form_name
             )
-        return True if status else False
+        return status
 
     def __str__(self):
         '''
             Dunder method for WriteTemplate.
 
-            :return: Object in a human-readable format.
+            :return: object in a human-readable format.
             :rtype: <str>
             :exceptions: None
         '''
