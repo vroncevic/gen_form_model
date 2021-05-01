@@ -27,6 +27,7 @@ try:
     from pathlib import Path
     from ats_utilities.checker import ATSChecker
     from ats_utilities.console_io.error import error_message
+    from ats_utilities.config_io.base_check import FileChecking
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
@@ -37,21 +38,21 @@ except ImportError as ats_error_message:
 __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.3.1'
+__license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
+__version__ = '1.3.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class ReadTemplate:
+class ReadTemplate(FileChecking):
     '''
         Defined class ReadTemplate with attribute(s) and method(s).
         Created API for read a template file and return in string format.
         It defines:
 
             :attributes:
-                | VERBOSE - console text indicator for current process-phase.
+                | GEN_VERBOSE - console text indicator for process-phase.
                 | TEMPLATE_DIR - prefix path to templates.
                 | __template - absolute template file path.
             :methods:
@@ -61,7 +62,7 @@ class ReadTemplate:
                 | __str__ - dunder method for ReadTemplate.
     '''
 
-    VERBOSE = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
+    GEN_VERBOSE = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
     TEMPLATE_DIR = '/../conf/template/'
 
     def __init__(self, verbose=False):
@@ -72,7 +73,8 @@ class ReadTemplate:
             :type verbose: <bool>
             :exceptions: None
         '''
-        verbose_message(ReadTemplate.VERBOSE, verbose, 'init template')
+        FileChecking.__init__(self, verbose=verbose)
+        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'init template')
         self.__template = '{0}{1}'.format(
             Path(__file__).resolve().parent, ReadTemplate.TEMPLATE_DIR
         )
@@ -111,14 +113,20 @@ class ReadTemplate:
             self.__template, form_template
         ), None
         verbose_message(
-            ReadTemplate.VERBOSE, verbose, 'loading template', template_file
+            ReadTemplate.GEN_VERBOSE, verbose,
+            'loading template', template_file
         )
         if bool(template_file) and exists(template_file):
-            with open(template_file, 'r') as form_file:
-                form_content = form_file.read()
+            self.check_path(template_file, verbose=verbose)
+            self.check_mode('r', verbose=verbose)
+            self.check_format(template_file, 'template',verbose=verbose)
+            if self.is_file_ok():
+                with open(template_file, 'r') as form_file:
+                    form_content = form_file.read()
         else:
             error_message(
-                ReadTemplate.VERBOSE, 'check file {0}'.format(template_file)
+                ReadTemplate.GEN_VERBOSE,
+                'check file {0}'.format(template_file)
             )
         return form_content
 
@@ -130,6 +138,7 @@ class ReadTemplate:
             :rtype: <str>
             :exceptions: None
         '''
-        return '{0} ({1})'.format(
-            self.__class__.__name__, str(self.__template)
+        return '{0} ({1}, {2})'.format(
+            self.__class__.__name__, FileChecking.__str__(self),
+            str(self.__template)
         )

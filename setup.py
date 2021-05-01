@@ -17,7 +17,7 @@
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Defined setup for gen_form_model package.
+     Defined setup for tool gen_form_model.
 """
 
 from __future__ import print_function
@@ -29,7 +29,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.3.1'
+__version__ = '1.3.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -75,8 +75,6 @@ def install_directory():
 
 INSTALL_DIR = install_directory()
 TOOL_DIR = 'gen_form_model/'
-CONF_DIR = '{0}{1}'.format(TOOL_DIR, 'conf/')
-TEMPLATE_DIR = '{0}{1}'.format(CONF_DIR, 'template/')
 THIS_DIR, LONG_DESCRIPTION = abspath(dirname(__file__)), None
 with open(join(THIS_DIR, 'README.md')) as readme:
     LONG_DESCRIPTION = readme.read()
@@ -99,7 +97,7 @@ APPROVED_LICENSES = [
 PYP_CLASSIFIERS = SUPPORTED_PY_VERSIONS + APPROVED_LICENSES
 setup(
     name='gen_form_model',
-    version='1.3.1',
+    version='1.3.2',
     description='Form model based on Django, Flask',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
@@ -127,40 +125,21 @@ setup(
         'Flask-WTF',
         'Django'
     ],
+    package_data = {
+        'gen_form_model': [
+            'conf/gen_form_model.cfg',
+            'conf/gen_form_model_util.cfg',
+            'conf/project.yaml',
+            'conf/template/django.template',
+            'conf/template/flask.template',
+            'log/gen_form_model.log'
+        ]
+    },
     data_files=[
         (
             '/usr/local/bin/', [
                 '{0}{1}'.format(TOOL_DIR, 'run/gen_form_model_run.py')
             ]
-        ),
-        (
-            '{0}{1}'.format(INSTALL_DIR, CONF_DIR), [
-                '{0}{1}'.format(CONF_DIR, 'gen_form_model.cfg')
-            ]
-        ),
-        (
-            '{0}{1}'.format(INSTALL_DIR, CONF_DIR), [
-                '{0}{1}'.format(CONF_DIR, 'gen_form_model_util.cfg')
-            ]
-        ),
-        (
-            '{0}{1}'.format(INSTALL_DIR, CONF_DIR), [
-                '{0}{1}'.format(CONF_DIR, 'project.yaml')
-            ]
-        ),
-        (
-            '{0}{1}'.format(INSTALL_DIR, TEMPLATE_DIR), [
-                '{0}{1}'.format(TEMPLATE_DIR, 'django.template')
-            ]
-        ),
-        (
-            '{0}{1}'.format(INSTALL_DIR, TEMPLATE_DIR), [
-                '{0}{1}'.format(TEMPLATE_DIR, 'flask.template')
-            ]
-        ),
-        (
-            '{0}{1}{2}'.format(INSTALL_DIR, TOOL_DIR, 'log/'),
-            ['{0}{1}'.format(TOOL_DIR, 'log/gen_form_model.log')]
         )
     ]
 )
