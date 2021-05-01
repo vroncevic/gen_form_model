@@ -40,8 +40,8 @@ except ImportError as ats_error_message:
 __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.3.1'
+__license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
+__version__ = '1.3.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -148,7 +148,7 @@ class GenForm(FileChecking):
                     status = self.__writer.write(
                         form_content, form_name, verbose=verbose
                     )
-        return True if status else False
+        return status
 
     def select_pro_type(self, verbose=False):
         '''
@@ -156,7 +156,7 @@ class GenForm(FileChecking):
 
             :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: project type and project ID | None and None.
+            :return: project template selected | None.
             :rtype: <str> | <NoneType>
             :exceptions: None
         '''

@@ -28,6 +28,7 @@ from string import Template
 try:
     from ats_utilities.checker import ATSChecker
     from ats_utilities.console_io.error import error_message
+    from ats_utilities.config_io.base_check import FileChecking
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
@@ -38,14 +39,14 @@ except ImportError as ats_error_message:
 __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'https://github.com/vroncevic/gen_form_model/blob/master/LICENSE'
-__version__ = '1.3.1'
+__license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
+__version__ = '1.3.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class WriteTemplate:
+class WriteTemplate(FileChecking):
     '''
         Defined class WriteTemplate with attribute(s) and method(s).
         Created API for write a template content with parameters to a file.
@@ -71,6 +72,7 @@ class WriteTemplate:
             :type verbose: <bool>
             :exceptions: None
         '''
+        FileChecking.__init__(self, verbose=verbose)
         verbose_message(WriteTemplate.GEN_VERBOSE, verbose, 'init writter')
         self.__file_name = None
 
@@ -124,7 +126,11 @@ class WriteTemplate:
             with open(module_file, 'w') as form_file:
                 form_file.write(template.substitute(module_info))
                 chmod(module_file, 0o666)
-                status = True
+                self.check_path(module_file, verbose=verbose)
+                self.check_mode('w', verbose=verbose)
+                self.check_format(module_file, 'py',verbose=verbose)
+                if self.is_file_ok():
+                    status = True
         else:
             error_message(
                 WriteTemplate.GEN_VERBOSE, 'failed to write module', form_name
@@ -139,4 +145,7 @@ class WriteTemplate:
             :rtype: <str>
             :exceptions: None
         '''
-        return '{0} ({1})'.format(self.__class__.__name__, self.__file_name)
+        return '{0} ({1}, {2})'.format(
+            self.__class__.__name__, FileChecking.__str__(self),
+            self.__file_name
+        )

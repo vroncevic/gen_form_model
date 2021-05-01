@@ -40,7 +40,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.3.1'
+__version__ = '1.3.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -172,16 +172,16 @@ class GenFormModel(CfgCLI):
             self.logger.write_log(
                 'tool is not operational', ATSLogger.ATS_ERROR
             )
-        return True if status else False
+        return status
 
     def __str__(self):
         '''
             Dunder method for GenFormModel.
 
-            :return: Object in a human-readable format.
+            :return: object in a human-readable format.
             :rtype: <str>
             :exceptions: None
         '''
-        return '{0} ({1})'.format(
+        return '{0} ({1}, {2})'.format(
             self.__class__.__name__, CfgCLI.__str__(self), str(self.logger)
         )
