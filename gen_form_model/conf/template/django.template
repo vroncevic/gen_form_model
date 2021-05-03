@@ -45,7 +45,7 @@ class ${mod}(forms.Form):
         It defines:
 
             :attributes:
-                None
+                None.
             :methods:
-                None
+                None.
     '''
