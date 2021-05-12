@@ -40,7 +40,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.4.2'
+__version__ = '1.5.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -90,7 +90,7 @@ class GenFormModel(CfgCLI):
         )
         if self.tool_operational:
             self.add_new_option(
-                GenFormModel.OPS[0], GenFormModel.OPS[1], dest='mod',
+                GenFormModel.OPS[0], GenFormModel.OPS[1], dest='gen',
                 help='generate form model'
             )
             self.add_new_option(
@@ -108,7 +108,7 @@ class GenFormModel(CfgCLI):
 
             :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: boolean value True (success) | False.
+            :return: boolean status, True (success) | False.
             :rtype: <bool>
             :exceptions: None
         '''
@@ -124,29 +124,29 @@ class GenFormModel(CfgCLI):
             args = self.parse_args(sys.argv[1:])
             current_dir = Path(__file__).resolve().parent
             form_file = '{0}/{1}{2}'.format(
-                current_dir, getattr(args, 'mod'), '.py'
+                current_dir, getattr(args, 'gen'), '.py'
             )
             form_file_exist = Path(form_file).exists()
             if not form_file_exist:
-                if bool(getattr(args, 'mod')):
+                if bool(getattr(args, 'gen')):
                     print(
                         '{0} {1} [{2}]'.format(
                             '[{0}]'.format(GenFormModel.GEN_VERBOSE.lower()),
-                            'generating form', getattr(args, 'mod')
+                            'generating form', getattr(args, 'gen')
                         )
                     )
                     generator = GenForm(
                         verbose=getattr(args, 'verbose') or verbose
                     )
                     status = generator.gen_form(
-                        '{0}'.format(getattr(args, 'mod')),
+                        '{0}'.format(getattr(args, 'gen')),
                         verbose=getattr(args, 'verbose') or verbose
                     )
                     if status:
                         success_message(GenFormModel.GEN_VERBOSE, 'done\n')
                         self.logger.write_log(
                             '{0} {1} done'.format(
-                                'generating form', getattr(args, 'mod')
+                                'generating form', getattr(args, 'gen')
                             ), ATSLogger.ATS_INFO
                         )
                     else:
