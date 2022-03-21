@@ -21,11 +21,12 @@
 '''
 
 import sys
-from os import getcwd
+from os.path import exists, dirname, realpath
 
 try:
-    from pathlib import Path
+    from six import add_metaclass
     from gen_form_model.pro import GenForm
+    from ats_utilities.splash import Splash
     from ats_utilities.logging import ATSLogger
     from ats_utilities.cli.cfg_cli import CfgCLI
     from ats_utilities.cooperative import CooperativeMeta
@@ -40,12 +41,13 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.5.2'
+__version__ = '1.5.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
+@add_metaclass(CooperativeMeta)
 class GenFormModel(CfgCLI):
     '''
         Defined class GenFormModel with attribute(s) and method(s).
@@ -53,10 +55,10 @@ class GenFormModel(CfgCLI):
         It defines:
 
             :attributes:
-                | __metaclass__ - setting cooperative metaclasses.
                 | GEN_VERBOSE - console text indicator for process-phase.
                 | CONFIG - tool info file path.
                 | LOG - tool log file path.
+                | LOGO - logo for splash screen.
                 | OPS - list of tool options.
                 | logger - logger object API.
             :methods:
@@ -65,10 +67,10 @@ class GenFormModel(CfgCLI):
                 | __str__ - dunder method for DistPyModule.
     '''
 
-    __metaclass__ = CooperativeMeta
     GEN_VERBOSE = 'GEN_FORM_MODEL'
     CONFIG = '/conf/gen_form_model.cfg'
     LOG = '/log/gen_form_model.log'
+    LOGO = '/conf/gen_form_model.logo'
     OPS = ['-g', '--gen', '-v', '--verbose', '--version']
 
     def __init__(self, verbose=False):
@@ -79,7 +81,15 @@ class GenFormModel(CfgCLI):
             :type verbose: <bool>
             :exceptions: None
         '''
-        current_dir = Path(__file__).resolve().parent
+        current_dir = dirname(realpath(__file__))
+        gen_form_model_property = {
+            'ats_organization': 'vroncevic',
+            'ats_repository': 'gen_form_model',
+            'ats_name': 'gen_form_model',
+            'ats_logo_path': '{0}{1}'.format(current_dir, GenFormModel.LOGO),
+            'ats_use_github_infrastructure': True
+        }
+        splash = Splash(gen_form_model_property, verbose=verbose)
         base_info = '{0}{1}'.format(current_dir, GenFormModel.CONFIG)
         CfgCLI.__init__(self, base_info, verbose=verbose)
         verbose_message(GenFormModel.GEN_VERBOSE, verbose, 'init tool info')
@@ -122,11 +132,11 @@ class GenFormModel(CfgCLI):
             else:
                 sys.argv.append('-h')
             args = self.parse_args(sys.argv[1:])
-            current_dir = Path(__file__).resolve().parent
+            current_dir = dirname(realpath(__file__))
             form_file = '{0}/{1}{2}'.format(
                 current_dir, getattr(args, 'gen'), '.py'
             )
-            form_file_exist = Path(form_file).exists()
+            form_file_exist = exists(form_file)
             if not form_file_exist:
                 if bool(getattr(args, 'gen')):
                     print(

@@ -21,10 +21,9 @@
 '''
 
 import sys
-from os.path import exists
+from os.path import exists, dirname, realpath
 
 try:
-    from pathlib import Path
     from ats_utilities.checker import ATSChecker
     from ats_utilities.console_io.error import error_message
     from ats_utilities.config_io.base_check import FileChecking
@@ -39,7 +38,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.5.2'
+__version__ = '1.5.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -76,7 +75,7 @@ class ReadTemplate(FileChecking):
         FileChecking.__init__(self, verbose=verbose)
         verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'init template')
         self.__template = '{0}{1}'.format(
-            Path(__file__).resolve().parent, ReadTemplate.TEMPLATE_DIR
+            dirname(realpath(__file__)), ReadTemplate.TEMPLATE_DIR
         )
 
     def get_template(self):
@@ -119,7 +118,7 @@ class ReadTemplate(FileChecking):
         if bool(template_file) and exists(template_file):
             self.check_path(template_file, verbose=verbose)
             self.check_mode('r', verbose=verbose)
-            self.check_format(template_file, 'template',verbose=verbose)
+            self.check_format(template_file, 'template', verbose=verbose)
             if self.is_file_ok():
                 with open(template_file, 'r') as form_file:
                     form_content = form_file.read()

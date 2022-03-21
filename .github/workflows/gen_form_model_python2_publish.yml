@@ -2,8 +2,20 @@ name: Install Python2 Package gen_form_model
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'gen_form_model/**'
+      - 'MANIFEST.in'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'gen_form_model/**'
+      - 'MANIFEST.in'
+      - 'pyproject.toml'
+      - 'setup.cfg'
+      - 'setup.py'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,7 +24,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v1
       with:
-        python-version: '2.x'
+        python-version: '2.7'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
