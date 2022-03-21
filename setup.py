@@ -34,6 +34,7 @@ __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
+
 def install_directory():
     '''
         Return the installation directory, or None.
@@ -72,6 +73,7 @@ def install_directory():
     )
     print(message)
     return None
+
 
 INSTALL_DIR = install_directory()
 TOOL_DIR = 'gen_form_model/'
@@ -125,8 +127,9 @@ setup(
         'Flask-WTF',
         'Django'
     ],
-    package_data = {
+    package_data={
         'gen_form_model': [
+            'conf/gen_form_model.logo',
             'conf/gen_form_model.cfg',
             'conf/gen_form_model_util.cfg',
             'conf/project.yaml',
