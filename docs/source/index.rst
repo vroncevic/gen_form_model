@@ -1,12 +1,12 @@
 Generate Form Model (Django/Flask)
 ----------------------------------
 
-**gen_form_model** is tool for generation form model for:
+**gen_form_model** is tool for generation form model for
 
 * Django FWK
 * Flask FWK
 
-Developed in `python <https://www.python.org/>`_ code: **100%**.
+Developed in `python <https://www.python.org/>`_ code.
 
 The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
@@ -14,8 +14,8 @@ other information that should be provided before the modules are installed.
 
 |Python package| |GitHub issues| |Documentation Status| |GitHub contributors|
 
-.. |Python package| image:: https://github.com/vroncevic/gen_form_model/workflows/Python%20package%20gen_form_model/badge.svg
-   :target: https://github.com/vroncevic/gen_form_model/workflows/Python%20package%20gen_form_model/badge.svg?branch=master
+.. |Python package| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_package.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_package.yml/badge.svg?branch=master
 
 .. |GitHub issues| image:: https://img.shields.io/github/issues/vroncevic/gen_form_model.svg
    :target: https://github.com/vroncevic/gen_form_model/issues
@@ -28,7 +28,7 @@ other information that should be provided before the modules are installed.
 
 .. toctree::
    :maxdepth: 4
-   :caption: Contents:
+   :caption: Contents
 
    self
    modules
@@ -38,17 +38,17 @@ Installation
 
 |Install Python2 Package| |Install Python3 Package|
 
-.. |Install Python2 Package| image:: https://github.com/vroncevic/gen_form_model/workflows/Install%20Python2%20Package%20gen_form_model/badge.svg
-   :target: https://github.com/vroncevic/gen_form_model/workflows/Install%20Python2%20Package%20gen_form_model/badge.svg?branch=master
+.. |Install Python2 Package| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python2_publish.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python2_publish.yml/badge.svg?branch=master
 
-.. |Install Python3 Package| image:: https://github.com/vroncevic/gen_form_model/workflows/Install%20Python3%20Package%20gen_form_model/badge.svg
-   :target: https://github.com/vroncevic/gen_form_model/workflows/Install%20Python3%20Package%20gen_form_model/badge.svg?branch=master
+.. |Install Python3 Package| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python3_publish.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python3_publish.yml/badge.svg?branch=master
 
 Navigate to release `page`_ download and extract release archive.
 
 .. _page: https://github.com/vroncevic/gen_form_model/releases
 
-To install this set of modules type the following:
+To install this set of modules type the following
 
 .. code-block:: bash
 
@@ -65,7 +65,7 @@ To install this set of modules type the following:
     python3 setup.py install_egg_info
     python3 setup.py install_data
 
-You can use Docker to create image/container, or You can use pip to install:
+You can use Docker to create image/container, or You can use pip to install
 
 .. code-block:: bash
 
@@ -76,13 +76,13 @@ You can use Docker to create image/container, or You can use pip to install:
 
 |GitHub docker checker|
 
-.. |GitHub docker checker| image:: https://github.com/vroncevic/gen_form_model/workflows/gen_form_model%20docker%20checker/badge.svg
-   :target: https://github.com/vroncevic/gen_form_model/actions?query=workflow%3A%22gen_form_model+docker+checker%22
+.. |GitHub docker checker| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_docker_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_docker_checker.yml
 
 Dependencies
 -------------
 
-**gen_form_model** requires next modules and libraries:
+**gen_form_model** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 * `Flask-WTF - Simple integration of Flask and WTForms <https://pypi.org/project/Flask-WTF/>`_
@@ -91,18 +91,18 @@ Dependencies
 Generation process
 -------------------
 
-Generation flow:
+Generation flow
 
 .. image:: https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model_flow.png
 
 Library structure
 ------------------
 
-**gen_form_model** is based on OOP:
+**gen_form_model** is based on OOP
 
 .. image:: https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model.png
 
-Code structure:
+Code structure
 
 .. code-block:: bash
 

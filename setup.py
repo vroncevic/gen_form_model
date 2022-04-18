@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-"""
+'''
  Module
      setup.py
  Copyright
@@ -18,7 +18,7 @@
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
      Defined setup for tool gen_form_model.
-"""
+'''
 
 from __future__ import print_function
 import sys
@@ -29,7 +29,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.5.3'
+__version__ = '1.6.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -77,11 +77,14 @@ def install_directory():
 
 INSTALL_DIR = install_directory()
 TOOL_DIR = 'gen_form_model/'
+CONF, TEMPLATE, LOG = 'conf', 'template', 'log'
 THIS_DIR, LONG_DESCRIPTION = abspath(dirname(__file__)), None
 with open(join(THIS_DIR, 'README.md')) as readme:
     LONG_DESCRIPTION = readme.read()
 PROGRAMMING_LANG = 'Programming Language :: Python ::'
-VERSIONS = ['2.7', '3', '3.2', '3.3', '3.4']
+VERSIONS = [
+    '2.7', '3', '3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8', '3.9'
+]
 SUPPORTED_PY_VERSIONS = [
     '{0} {1}'.format(PROGRAMMING_LANG, VERSION) for VERSION in VERSIONS
 ]
@@ -99,7 +102,7 @@ APPROVED_LICENSES = [
 PYP_CLASSIFIERS = SUPPORTED_PY_VERSIONS + APPROVED_LICENSES
 setup(
     name='gen_form_model',
-    version='1.5.3',
+    version='1.6.3',
     description='Form model based on Django, Flask',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
@@ -129,13 +132,13 @@ setup(
     ],
     package_data={
         'gen_form_model': [
-            'conf/gen_form_model.logo',
-            'conf/gen_form_model.cfg',
-            'conf/gen_form_model_util.cfg',
-            'conf/project.yaml',
-            'conf/template/django.template',
-            'conf/template/flask.template',
-            'log/gen_form_model.log'
+            '{0}/{1}'.format(CONF, 'gen_form_model.logo'),
+            '{0}/{1}'.format(CONF, 'gen_form_model.cfg'),
+            '{0}/{1}'.format(CONF, 'gen_form_model_util.cfg'),
+            '{0}/{1}'.format(CONF, 'project.yaml'),
+            '{0}/{1}'.format(TEMPLATE, 'django.template'),
+            '{0}/{1}'.format(TEMPLATE, 'flask.template'),
+            '{0}/{1}'.format(LOG, 'gen_form_model.log')
         ]
     },
     data_files=[

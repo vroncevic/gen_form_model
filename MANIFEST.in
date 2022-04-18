@@ -1,2 +1,14 @@
 global-exclude *.py[cod]
 global-exclude *.editorconfig
+include gen_form_model/conf/gen_form_model.cfg
+include gen_form_model/conf/gen_form_model.logo
+include gen_form_model/conf/gen_form_model_util.cfg
+include gen_form_model/conf/project.yaml
+include gen_form_model/conf/template/django.template
+include gen_form_model/conf/template/flask.template
+include gen_form_model/__init__.py
+include gen_form_model/log/gen_form_model.log
+include gen_form_model/pro/__init__.py
+include gen_form_model/pro/read_template.py
+include gen_form_model/pro/write_template.py
+include gen_form_model/run/gen_form_model_run.py
