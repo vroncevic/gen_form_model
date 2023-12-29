@@ -1,4 +1,4 @@
-# Copyright 2017 Vladimir Roncevic <elektron.ronca@gmail.com>
+# Copyright 2017 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 #
 
-FROM debian:10
+FROM debian:12
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install -yq --no-install-recommends \
@@ -21,53 +21,39 @@ RUN DEBIAN_FRONTEND=noninteractive \
     nano \
     tree \
     htop \
-    wget \
     unzip \
     ca-certificates \
-    openssl \
-    python \
-    python-dev \
     python3 \
-    python3-dev \
+    python3-pip \
+    python3-wheel \
     libyaml-dev
 
-RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-RUN python2 get-pip.py
-RUN python2 -m pip install --upgrade setuptools
-RUN python2 -m pip install --upgrade pip
-RUN python2 -m pip install --upgrade build
-RUN rm -f get-pip.py
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py
 RUN python3 -m pip install --upgrade setuptools
 RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --upgrade build
 RUN rm -f get-pip.py
-COPY requirements.txt /
-RUN pip2 install -r requirements.txt
-RUN pip3 install -r requirements.txt
-RUN rm -f requirements.txt
 RUN mkdir /gen_form_model/
+RUN mkdir /tests/
 COPY gen_form_model /gen_form_model/
 COPY setup.py /
+COPY setup.cfg /
+COPY pyproject.toml /
+COPY MANIFEST.in /
 COPY README.md /
 COPY LICENSE /
-COPY setup.cfg /
-COPY MANIFEST.in /
-COPY pyproject.toml /
-RUN mkdir /tests/
-RUN find /gen_form_model/ -name "*.editorconfig" -type f -exec rm -Rf {} \;
-RUN python2 -m build --no-isolation --wheel
-RUN pip2 install ./dist/gen_form_model-*-py2-none-any.whl
+COPY requirements.txt /
+COPY tests /tests/
+RUN pip3 install -r requirements.txt
+RUN rm -f requirements.txt
 RUN python3 -m build --no-isolation --wheel
-RUN pip3 install ./dist/gen_form_model-*-py3-none-any.whl
-RUN rm -rf /gen_form_model*
+RUN pip3 install /dist/gen_form_model-*-py3-none-any.whl
+RUN rm -rf /gen_form_model/
+RUN rm -rf dist/ tests/
+RUN rm -f setup.cfg
+RUN rm -f pyproject.toml
+RUN rm -f MANIFEST.in
 RUN rm -f setup.py
 RUN rm -f README.md
 RUN rm -f LICENSE
-RUN rm -f setup.cfg
-RUN rm -f MANIFEST.in
-RUN rm -f pyproject.toml
-RUN rm -rf /build/
-RUN rm -rf /dist/
-RUN rm -rf /tests/

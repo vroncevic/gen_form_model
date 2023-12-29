@@ -4,7 +4,7 @@
  Module
      read_template.py
  Copyright
-     Copyright (C) 2017 Vladimir Roncevic <elektron.ronca@gmail.com>
+     Copyright (C) 2017 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
      gen_form_model is free software: you can redistribute it and/or modify it
      under the terms of the GNU General Public License as published by the
      Free Software Foundation, either version 3 of the License, or
@@ -16,128 +16,87 @@
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Defined class ReadTemplate with attribute(s) and method(s).
+     Defines class ReadTemplate with attribute(s) and method(s).
      Created API for read a template file and return in string format.
 '''
 
 import sys
-from os.path import exists, dirname, realpath
+from typing import List
+from os.path import dirname, realpath, exists
 
 try:
-    from ats_utilities.checker import ATSChecker
-    from ats_utilities.console_io.error import error_message
-    from ats_utilities.config_io.base_check import FileChecking
     from ats_utilities.console_io.verbose import verbose_message
-    from ats_utilities.exceptions.ats_type_error import ATSTypeError
-    from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
 except ImportError as ats_error_message:
-    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
-    sys.exit(MESSAGE)  # Force close python ATS ##############################
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2017, https://vroncevic.github.io/gen_form_model'
-__credits__ = ['Vladimir Roncevic']
+__copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
+__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.3'
+__version__ = '1.5.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class ReadTemplate(FileChecking):
+class ReadTemplate:
     '''
-        Defined class ReadTemplate with attribute(s) and method(s).
-        Created API for read a template file and return in string format.
+        Defines class ReadTemplate with attribute(s) and method(s).
+        Creates an API for reading a model template.
+
         It defines:
 
-            :attributes:
-                | GEN_VERBOSE - console text indicator for process-phase.
-                | TEMPLATE_DIR - prefix path to templates.
-                | __template - absolute template file path.
-            :methods:
-                | __init__ - initial constructor.
-                | get_template - getter for template object.
-                | read - read a template and return a string representation.
-                | __str__ - dunder method for ReadTemplate.
+            attributes:
+                | _GEN_VERBOSE - Console text indicator for process-phase.
+                | _TEMPLATE_DIR - Prefix path to templates.
+            methods:
+                | __init__ - Initials ReadTemplate constructor.
+                | read - Reads a template.
     '''
 
-    GEN_VERBOSE = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
-    TEMPLATE_DIR = '/../conf/template/'
+    _GEN_VERBOSE: str = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
+    _TEMPLATE_DIR: str = '/../conf/template/'
 
-    def __init__(self, verbose=False):
+    def __init__(self, verbose: bool = False):
         '''
-            Initial constructor.
+            Initials ReadTemplate constructor.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :exceptions: None
         '''
-        FileChecking.__init__(self, verbose=verbose)
-        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'init template')
-        self.__template = '{0}{1}'.format(
-            dirname(realpath(__file__)), ReadTemplate.TEMPLATE_DIR
-        )
+        verbose_message(verbose, [f'{self._GEN_VERBOSE.lower()} init reader'])
 
-    def get_template(self):
+    def read(
+        self,
+        model_type: str | None,
+        verbose: bool = False
+    ) -> str | None:
         '''
-            Getter for template object.
+            Reads a template.
 
-            :return: template object.
-            :rtype: <str>
-            :exceptions: None
-        '''
-        return self.__template
-
-    def read(self, form_template, verbose=False):
-        '''
-            Read a template and return a string representation.
-
-            :param form_template: form template file.
-            :type form_template: <str>
-            :param verbose: enable/disable verbose option.
+            :param model_type: Model type | None
+            :type model_type: <str> | <NoneType>
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
-            :return: form content | None.
+            :return: Form model | None
             :rtype: <str> | <NoneType>
-            :exception: ATSTypeError | ATSBadCallError
+            :excptions: None
         '''
-        checker, error, status = ATSChecker(), None, False
-        error, status = checker.check_params([
-            ('str:form_template', form_template)
-        ])
-        if status == ATSChecker.TYPE_ERROR:
-            raise ATSTypeError(error)
-        if status == ATSChecker.VALUE_ERROR:
-            raise ATSBadCallError(error)
-        template_file, form_content = '{0}{1}'.format(
-            self.__template, form_template
-        ), None
+        model_base_content: str | None = None
+        model_content: str | None = None
+        current_dir: str = dirname(realpath(__file__))
+        pro_structure: str = f'{current_dir}{self._TEMPLATE_DIR}'
+        model: str = f'{pro_structure}{model_type}.template'
+        if exists(model):
+            with open(model, 'r', encoding='utf-8') as model_file:
+                model_content = model_file.read()
         verbose_message(
-            ReadTemplate.GEN_VERBOSE, verbose,
-            'loading template', template_file
+            verbose, [
+                f'{self._GEN_VERBOSE.lower()}',
+                f'{model_base_content}',
+                f'{model}'
+            ]
         )
-        if bool(template_file) and exists(template_file):
-            self.check_path(template_file, verbose=verbose)
-            self.check_mode('r', verbose=verbose)
-            self.check_format(template_file, 'template', verbose=verbose)
-            if self.is_file_ok():
-                with open(template_file, 'r') as form_file:
-                    form_content = form_file.read()
-        else:
-            error_message(
-                ReadTemplate.GEN_VERBOSE,
-                'check file {0}'.format(template_file)
-            )
-        return form_content
-
-    def __str__(self):
-        '''
-            Dunder method for ReadTemplate.
-
-            :return: object in a human-readable format.
-            :rtype: <str>
-            :exceptions: None
-        '''
-        return '{0} ({1}, {2})'.format(
-            self.__class__.__name__, FileChecking.__str__(self),
-            str(self.__template)
-        )
+        return model_content
