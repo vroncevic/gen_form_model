@@ -42,7 +42,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.3'
+__version__ = '1.6.4'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -70,7 +70,7 @@ class GenForm(FileCheck, ProConfig, ProName):
     _GEN_VERBOSE: str = 'GEN_FORM_MODEL::PRO::GEN_FORM'
     _PRO_STRUCTURE: str = '/../conf/project.yaml'
 
-    def __init__(self, verbose: bool = False):
+    def __init__(self, verbose: bool = False) -> None:
         '''
             Initials GenForm constructor.
 
@@ -144,14 +144,13 @@ class GenForm(FileCheck, ProConfig, ProName):
         status: bool = False
         verbose_message(
             verbose, [
-                f'{self._GEN_VERBOSE}',
+                f'{self._GEN_VERBOSE.lower()}',
                 'generate', form_type, 'form', form_name
             ]
         )
         model_content: str | None = None
         if bool(self._reader):
             model_content = self._reader.read(form_type, verbose)
-        if all([bool(model_content), bool(self._writer)]):
-            if self._writer.write(model_content, form_name, verbose):
-                status = True
+            if bool(model_content) and bool(self._writer):
+                status = self._writer.write(model_content, form_name, verbose)
         return status

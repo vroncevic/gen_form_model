@@ -1,7 +1,7 @@
 Generate Form Model (Django/Flask)
 ----------------------------------
 
-**gen_form_model** is tool for generation form model for:
+**gen_form_model** is generator for form model
 
 * Django FWK
 * Flask FWK
@@ -48,7 +48,7 @@ Navigate to release `page`_ download and extract release archive.
 
 .. _page: https://github.com/vroncevic/gen_form_model/releases
 
-To install this set of modules type the following:
+To install this set of modules type the following
 
 .. code-block:: bash
 
@@ -70,7 +70,7 @@ You can use Docker to create image/container, or You can use pip to install
 Dependencies
 -------------
 
-**gen_form_model** requires next modules and libraries:
+**gen_form_model** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 

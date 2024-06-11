@@ -36,7 +36,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.3'
+__version__ = '1.6.4'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -75,19 +75,19 @@ class ReadTemplateTestCase(TestCase):
     def test_read_template_empty(self) -> None:
         '''Test read templates empty'''
         template = ReadTemplate()
-        module = template.read('')
+        module: str | None = template.read('')
         self.assertTrue(not bool(module))
 
     def test_read_template_none(self) -> None:
         '''Test read templates None'''
         template = ReadTemplate()
-        module = template.read(None)
+        module: str | None = template.read(None)
         self.assertTrue(not bool(module))
 
     def test_read_template(self) -> None:
         '''Test read templates'''
         template = ReadTemplate()
-        module = template.read('django')
+        module: str | None = template.read('django')
         self.assertTrue(bool(module))
 
 
