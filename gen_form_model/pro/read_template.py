@@ -34,7 +34,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.3'
+__version__ = '1.6.4'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -58,7 +58,7 @@ class ReadTemplate:
     _GEN_VERBOSE: str = 'GEN_FORM_MODEL::PRO::READ_TEMPLATE'
     _TEMPLATE_DIR: str = '/../conf/template/'
 
-    def __init__(self, verbose: bool = False):
+    def __init__(self, verbose: bool = False) -> None:
         '''
             Initials ReadTemplate constructor.
 
@@ -69,9 +69,7 @@ class ReadTemplate:
         verbose_message(verbose, [f'{self._GEN_VERBOSE.lower()} init reader'])
 
     def read(
-        self,
-        model_type: str | None,
-        verbose: bool = False
+        self, model_type: str | None, verbose: bool = False
     ) -> str | None:
         '''
             Reads a template.

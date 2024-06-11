@@ -39,7 +39,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.3'
+__version__ = '1.6.4'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -106,7 +106,7 @@ class WriteTemplate(FileCheck):
         verbose_message(
             verbose, [f'{self._GEN_VERBOSE.lower()} writer template']
         )
-        module_file = f'{getcwd()}/{model_name}.py'
+        module_file: str = f'{getcwd()}/{model_name}.py'
         model_params: Dict[str, str] = {
             'PRO': f'{model_name}',
             'MODC': f'{model_name.capitalize()}',

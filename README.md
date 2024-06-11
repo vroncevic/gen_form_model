@@ -1,8 +1,8 @@
-<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model_logo.png" width="25%">
-
 # Generate Form Model (Django/Flask)
 
-**gen_form_model** is tool for generation form model for:
+<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_form_model/dev/docs/gen_form_model_logo.png" width="25%">
+
+**gen_form_model** is generator for form model:
 
 * Django FWK
 * Flask FWK
@@ -46,7 +46,8 @@ Currently there are three ways to install tool:
 **gen_form_model** is located at **[pypi.org](https://pypi.org/project/gen-form-model/)**.
 
 You can install by using pip
-```
+
+```bash
 # python3
 pip3 install gen-form-model
 ```
@@ -94,7 +95,7 @@ You can use Dockerfile to create image/container.
 
 ### Dependencies
 
-**gen_form_model** requires next modules and libraries:
+**gen_form_model** requires next modules and libraries
 
 * [ats-utilities - Python App/Tool/Script Utilities](https://vroncevic.github.io/ats_utilities)
 
@@ -104,7 +105,7 @@ You can use Dockerfile to create image/container.
 
 Generator structure
 
-```
+```bash
     gen_form_model/
         ├── conf/
         │   ├── gen_form_model.cfg
