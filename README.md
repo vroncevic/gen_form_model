@@ -107,24 +107,26 @@ Generator structure
 
 ```bash
     gen_form_model/
-        ├── conf/
-        │   ├── gen_form_model.cfg
-        │   ├── gen_form_model_util.cfg
-        │   ├── project.yaml
-        │   └── template/
-        │       ├── django.template
-        │       └── flask.template
-        ├── __init__.py
-        ├── log/
-        │   └── gen_form_model.log
-        ├── pro/
-        │   ├── __init__.py
-        │   ├── read_template.py
-        │   └── write_template.py
-        └── run/
-            └── gen_form_model_run.py
-        
-        6 directories, 11 files
+          ├── conf/
+          │   ├── gen_form_model.cfg
+          │   ├── gen_form_model.logo
+          │   ├── gen_form_model_util.cfg
+          │   ├── project.yaml
+          │   └── template/
+          │       ├── django.template
+          │       └── flask.template
+          ├── __init__.py
+          ├── log/
+          │   └── gen_form_model.log
+          ├── pro/
+          │   ├── __init__.py
+          │   ├── read_template.py
+          │   └── write_template.py
+          ├── py.typed
+          └── run/
+              └── gen_form_model_run.py
+    
+    6 directories, 13 files
 ```
 
 ### Docs

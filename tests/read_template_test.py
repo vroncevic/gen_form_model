@@ -23,7 +23,7 @@ Execute
 '''
 
 import sys
-from typing import List
+from typing import List, Optional
 from unittest import TestCase, main
 
 try:
@@ -36,7 +36,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.5'
+__version__ = '1.6.6'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -75,19 +75,19 @@ class ReadTemplateTestCase(TestCase):
     def test_read_template_empty(self) -> None:
         '''Test read templates empty'''
         template = ReadTemplate()
-        module: str | None = template.read('')
+        module: Optional[str] = template.read('')
         self.assertTrue(not bool(module))
 
     def test_read_template_none(self) -> None:
         '''Test read templates None'''
         template = ReadTemplate()
-        module: str | None = template.read(None)
+        module: Optional[str] = template.read(None)
         self.assertTrue(not bool(module))
 
     def test_read_template(self) -> None:
         '''Test read templates'''
         template = ReadTemplate()
-        module: str | None = template.read('django')
+        module: Optional[str] = template.read('django')
         self.assertTrue(bool(module))
 
 
