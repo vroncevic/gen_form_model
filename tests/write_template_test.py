@@ -23,7 +23,7 @@ Execute
 '''
 
 import sys
-from typing import List
+from typing import List, Optional
 from unittest import TestCase, main
 
 try:
@@ -39,7 +39,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.5'
+__version__ = '1.6.6'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -94,7 +94,7 @@ class WriteTemplateTestCase(TestCase):
         '''Test write name empty'''
         template = WriteTemplate()
         template_read = ReadTemplate()
-        module: str | None = template_read.read('django')
+        module: Optional[str] = template_read.read('django')
         with self.assertRaises(ATSValueError):
             self.assertFalse(template.write(module, ''))
 
@@ -102,7 +102,7 @@ class WriteTemplateTestCase(TestCase):
         '''Test write name None'''
         template = WriteTemplate()
         template_read = ReadTemplate()
-        module: str | None = template_read.read('django')
+        module: Optional[str] = template_read.read('django')
         with self.assertRaises(ATSTypeError):
             self.assertFalse(template.write(module, None))
 
@@ -110,7 +110,7 @@ class WriteTemplateTestCase(TestCase):
         '''Test write templates'''
         model_name: str = 'simple'
         template_read = ReadTemplate()
-        module: str | None = template_read.read('django')
+        module: Optional[str] = template_read.read('django')
         template_write = WriteTemplate()
         self.assertTrue(template_write.write(module, model_name))
 

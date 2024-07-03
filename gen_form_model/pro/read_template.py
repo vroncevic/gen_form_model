@@ -21,7 +21,7 @@
 '''
 
 import sys
-from typing import List
+from typing import List, Optional
 from os.path import dirname, realpath, exists
 
 try:
@@ -34,7 +34,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_form_model'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_form_model/blob/dev/LICENSE'
-__version__ = '1.6.5'
+__version__ = '1.6.6'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -69,21 +69,21 @@ class ReadTemplate:
         verbose_message(verbose, [f'{self._GEN_VERBOSE.lower()} init reader'])
 
     def read(
-        self, model_type: str | None, verbose: bool = False
-    ) -> str | None:
+        self, model_type: Optional[str], verbose: bool = False
+    ) -> Optional[str]:
         '''
             Reads a template.
 
             :param model_type: Model type | None
-            :type model_type: <str> | <NoneType>
+            :type model_type: <Optional[str]>
             :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :return: Form model | None
-            :rtype: <str> | <NoneType>
+            :rtype: <Optional[str]>
             :excptions: None
         '''
-        model_base_content: str | None = None
-        model_content: str | None = None
+        model_base_content: Optional[str] = None
+        model_content: Optional[str] = None
         current_dir: str = dirname(realpath(__file__))
         pro_structure: str = f'{current_dir}{self._TEMPLATE_DIR}'
         model: str = f'{pro_structure}{model_type}.template'
