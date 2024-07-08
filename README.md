@@ -129,6 +129,16 @@ Generator structure
     6 directories, 13 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `gen_form_model/__init__.py` | 75 | 14 | 81% |
+| `gen_form_model/pro/__init__.py` | 63 | 2 | 97% |
+| `gen_form_model/pro/read_template.py` | 31 | 2 | 94% |
+| `gen_form_model/pro/write_template.py` | 51 | 2 | 96% |
+| **Total** | 220 | 20 | 91% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/gen_form_model/badge/?version=latest)](https://gen-form-model.readthedocs.io/en/latest/?badge=latest)
