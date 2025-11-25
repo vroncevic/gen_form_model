@@ -25,6 +25,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Copyright and Licence](#copyright-and-licence)
 
@@ -133,11 +134,11 @@ Generator structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_form_model/__init__.py` | 75 | 14 | 81% |
-| `gen_form_model/pro/__init__.py` | 63 | 2 | 97% |
-| `gen_form_model/pro/read_template.py` | 31 | 2 | 94% |
-| `gen_form_model/pro/write_template.py` | 51 | 2 | 96% |
-| **Total** | 220 | 20 | 91% |
+| `gen_form_model/__init__.py` | 73 | 12 | 84%|
+| `gen_form_model/pro/__init__.py` | 61 | 0 | 100%|
+| `gen_form_model/pro/read_template.py` | 29 | 0 | 100%|
+| `gen_form_model/pro/write_template.py` | 49 | 0 | 100%|
+| **Total** | 212 | 12 | 94% |
 
 ### Docs
 
@@ -152,7 +153,7 @@ More documentation and info at
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2017 - 2024 by [vroncevic.github.io/gen_form_model](https://vroncevic.github.io/gen_form_model/)
+Copyright (C) 2017 - 2026 by [vroncevic.github.io/gen_form_model](https://vroncevic.github.io/gen_form_model/)
 
 **gen_form_model** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,
