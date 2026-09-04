@@ -12,13 +12,22 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-|gen_form_model python checker| |gen_form_model python package| |github issues| |documentation status| |github contributors|
+|gen_form_model python checker| |gen_form_model python package| |gen_form_model interface checker| |gen_form_model isp checker| |gen_form_model srp checker| |github issues| |documentation status| |github contributors|
 
 .. |gen_form_model python checker| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_python_checker.yml
 
 .. |gen_form_model python package| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_package_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_package.yml
+
+.. |gen_form_model interface checker| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_interface_checker.yml
+
+.. |gen_form_model isp checker| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_isp_checker.yml
+
+.. |gen_form_model srp checker| image:: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_form_model/actions/workflows/gen_form_model_srp_checker.yml
 
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/gen_form_model.svg
    :target: https://github.com/vroncevic/gen_form_model/issues
@@ -36,8 +45,8 @@ other information that should be provided before the modules are installed.
    self
    modules
 
-Installation
--------------
+🚀 Installation
+====================================================================
 
 |gen_form_model python3 build|
 
@@ -67,15 +76,15 @@ You can use Docker to create image/container, or You can use pip to install
     # pyton3
     pip3 install gen-form-model
 
-Dependencies
--------------
+📦 Dependencies
+====================================================================
 
 **gen_form_model** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 
-Tool structure
-------------------
+📁 Tool structure
+====================================================================
 
 **gen_form_model** is based on OOP
 
@@ -84,29 +93,65 @@ Code structure
 .. code-block:: bash
 
     gen_form_model/
-          ├── conf/
-          │   ├── gen_form_model.cfg
-          │   ├── gen_form_model.logo
-          │   ├── gen_form_model_util.cfg
-          │   ├── project.yaml
-          │   └── template/
-          │       ├── django.template
-          │       └── flask.template
-          ├── __init__.py
-          ├── log/
-          │   └── gen_form_model.log
-          ├── pro/
-          │   ├── __init__.py
-          │   ├── read_template.py
-          │   └── write_template.py
-          ├── py.typed
-          └── run/
-              └── gen_form_model_run.py
-    
-    6 directories, 13 files
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── project_setup.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── __init__.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── gen_form_model_command_definition.py
+         │   │   ├── gen_form_model_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   └── __init__.py
+         │   ├── config/
+         │   │   ├── gen_form_model.cfg
+         │   │   ├── gen_form_model.logo
+         │   │   ├── scheme.json
+         │   │   └── templates.tgz
+         │   ├── __init__.py
+         │   └── subprocessor.py
+         ├── __init__.py
+         ├── py.typed
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-Copyright and licence
-----------------------
+     10 directories, 45 files
+
+📄 Copyright and licence
+====================================================================
 
 |license: gpl v3| |license: apache 2.0|
 
