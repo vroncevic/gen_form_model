@@ -46,7 +46,7 @@ class TestService(unittest.TestCase):
         subprocessor.run = Mock(return_value=expected_result)
 
         service = Service(subprocessor)
-        params = ProjectSetup(chip_config={})
+        params = ProjectSetup(pro_config={})
         result = service.execute(params=params)
 
         self.assertEqual(result, expected_result)

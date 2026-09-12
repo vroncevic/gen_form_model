@@ -32,4 +32,4 @@ class TestGenFormModelBundleFactory(unittest.TestCase):
             GenFormModelBundleFactory.create_bundle(options)
 
     def test_get_version(self) -> None:
-        self.assertEqual(GenFormModelBundleFactory.get_version(), '2.0.0')
+        self.assertEqual(GenFormModelBundleFactory.get_version(), '2.0.1')
