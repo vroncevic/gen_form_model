@@ -1,0 +1,24 @@
+{
+    "django": {
+        "source_dir": "django",
+        "path_replacements": {
+            "model": "name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "flask": {
+        "source_dir": "flask",
+        "path_replacements": {
+            "model": "name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    }
+}
